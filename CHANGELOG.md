@@ -13,6 +13,19 @@
 - 创建首个子库 `ai-engineering/`
 - 建立标签体系与文档规范
 
+## [2026-06-06] — 留学模式：AI Infra 与应用层知识梳理
+
+### Added
+- **01-foundations/**:
+  - `ai-infra-landscape.md` — AI Infra 知识全景图：计算、数据、模型、平台、安全治理
+  - `ai-application-layer.md` — AI 应用层知识全景图：内容生成、知识处理、智能代理、垂直行业
+- **99-personal/**:
+  - `study-notes-2026-06-06.md` — AI Infra 与应用层留学过程记录
+
+### Changed
+- 更新 `01-foundations/README.md`，添加新文件索引
+- 更新 `99-personal/README.md`，添加新笔记索引
+
 ## [2026-06-05] — 留学模式：AI 领域知识体系梳理
 
 ### Added

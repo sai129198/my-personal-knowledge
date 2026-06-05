@@ -9,10 +9,14 @@
 | 文件 | 摘要 | 状态 |
 |------|------|------|
 | [`ai-knowledge-landscape.md`](./ai-knowledge-landscape.md) | AI 领域知识全景图：从基础概念到前沿研究的七层分层梳理 | #status/draft |
+| [`ai-infra-landscape.md`](./ai-infra-landscape.md) | AI Infra 知识全景图：计算、数据、模型、平台、安全治理 | #status/draft |
+| [`ai-application-layer.md`](./ai-application-layer.md) | AI 应用层知识全景图：内容生成、知识处理、智能代理、垂直行业 | #status/draft |
 
 ## 规划内容
 
 - [x] AI 领域知识全景图（七层架构）
+- [x] AI Infra 知识全景图
+- [x] AI 应用层知识全景图
 - [ ] Transformer 架构原理
 - [ ] 大模型训练流程（预训练 → SFT → RLHF）
 - [ ] 模型评估指标（Perplexity、BLEU、HumanEval 等）
