@@ -8,11 +8,11 @@
 
 | 文件 | 摘要 | 状态 |
 |------|------|------|
-| （待添加）| | |
+| [`rag-implementation-guide.md`](./rag-implementation-guide.md) | RAG 系统实现指南：从文档加载到生产部署的完整流程 | #status/draft |
 
 ## 规划内容
 
-- [ ] RAG 基础架构（检索 → 重排 → 生成）
+- [x] RAG 实现指南
 - [ ] 向量数据库选型对比
 - [ ] 高级检索策略（Hybrid Search、Query Expansion）
 - [ ] RAG 评估框架与指标

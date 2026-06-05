@@ -9,7 +9,7 @@
 | 目录 | 内容 | 说明 |
 |------|------|------|
 | [`00-meta/`](./00-meta/) | 术语表、模板、推荐阅读、升级路径 | 子库的基础设施 |
-| [`01-foundations/`](./01-foundations/) | AI 领域基础概念与核心技术 | 模型原理、评估指标、关键论文 |
+| [`01-foundations/`](./01-foundations/) | AI 领域基础概念与核心技术 | 知识全景图、模型原理、评估指标 |
 | [`02-model-selection/`](./02-model-selection/) | 模型选型与对比 | 各厂商模型能力矩阵、适用场景分析 |
 | [`03-prompt-engineering/`](./03-prompt-engineering/) | Prompt 工程实践 | 模式、技巧、框架、bad case 复盘 |
 | [`04-rag-architecture/`](./04-rag-architecture/) | RAG 架构设计 | 检索策略、向量数据库、评估方法 |
@@ -31,6 +31,7 @@
 | `#topic/rag` | RAG 架构 |
 | `#topic/agent` | Agent 设计 |
 | `#topic/evaluation` | 模型评估 |
+| `#topic/ai-overview` | AI 领域概览 |
 | `#vendor/openai` | OpenAI |
 | `#vendor/anthropic` | Anthropic |
 | `#vendor/google` | Google (Gemini) |
