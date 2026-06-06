@@ -1,13 +1,16 @@
 # 大模型原理、训练与微调详解
 
-#topic/llm #topic/training #topic/finetuning #topic/transformer #year/2026 #status/draft
+#topic/llm #topic/training #topic/finetuning #topic/transformer #topic/inference #year/2026 #status/reviewed
 
 ## 目录
 
 - [1. 大模型核心原理](#1-大模型核心原理)
 - [2. 大模型训练流程](#2-大模型训练流程)
 - [3. 大模型微调技术](#3-大模型微调技术)
-- [4. 实际应用建议](#4-实际应用建议)
+- [4. 对话模板与数据格式](#4-对话模板与数据格式)
+- [5. 推理优化技术](#5-推理优化技术)
+- [6. 核心概念速查表](#6-核心概念速查表)
+- [7. 实际应用建议](#7-实际应用建议)
 - [参考资料](#参考资料)
 
 ---
@@ -114,12 +117,35 @@ C: 计算量
 - 数据质量和多样性比单纯的数据量更重要
 - 计算效率存在最优配置
 
+**Chinchilla 最优配置（Hoffmann et al., 2022）**：
+
+DeepMind 提出的计算最优训练策略：
+
+| 发现 | 说明 |
+|------|------|
+| 等比例增长 | 模型参数和训练数据量应该等比例增长 |
+| 最优比例 | 参数量 ≈ 训练 token 数 / 20 |
+| 常见误区 | 很多模型 under-trained（数据量不足） |
+
+| 模型 | 参数量 | 训练 token | 比例 | 评价 |
+|------|--------|-----------|------|------|
+| GPT-3 | 175B | 300B | 1.7:1 | under-trained |
+| Chinchilla | 70B | 1.4T | 20:1 | 计算最优 |
+| Llama 3 | 70B | 15T | 214:1 | 极度 over-trained |
+
+> Llama 3 策略：固定模型大小，用海量数据训练，获得更好性能。
+
 **3. 涌现能力（Emergent Abilities）**
 
-当模型规模达到某个阈值时，会突然出现：
-- 上下文学习（In-Context Learning）
-- 思维链推理（Chain-of-Thought Reasoning）
-- 指令遵循（Instruction Following）
+当模型规模达到某个阈值时（通常 6B-10B），会突然出现小模型不具备的能力：
+
+| 能力 | 说明 | 示例 |
+|------|------|------|
+| **上下文学习** | 给几个示例就能学会新任务 | Few-shot prompt |
+| **思维链推理** | 逐步推理解决复杂问题 | Chain-of-Thought |
+| **指令遵循** | 理解并执行自然语言指令 | Instruction tuning |
+
+> 这些能力并非显式训练得到，而是大规模预训练的**涌现现象**。
 
 ---
 
@@ -185,6 +211,22 @@ for batch in dataloader:
 - GPT-3（175B）：约 3640 PetaFLOP/s-days
 - LLaMA 2（70B）：约 1720 PetaFLOP/s-days
 - 需要数千张 GPU，训练数周至数月
+
+**Tokenization（分词）**：
+
+文本需先转换为数字（token ID）才能被模型处理：
+
+| 策略 | 方法 | 优点 | 缺点 |
+|------|------|------|------|
+| **Word-based** | 按空格分词 | 语义完整 | 词表大、OOV 问题 |
+| **Character-based** | 按字符分词 | 词表小 | 序列长、语义弱 |
+| **Subword** | BPE/WordPiece | 平衡 | 需要训练分词器 |
+
+现代分词器词表大小：
+- GPT-2/3/4: 50,257 (BPE)
+- BERT: 30,522 (WordPiece)
+- Llama 3: 128,000 (BPE)
+- Qwen: 151,646 (BPE，中文优化)
 
 ### 2.3 阶段二：监督微调（SFT）
 
@@ -282,12 +324,14 @@ loss = -log(σ(β * (log(π(y_w|x)/π_ref(y_w|x)) - log(π(y_l|x)/π_ref(y_l|x))
 
 **RLHF vs DPO 对比**：
 
-| 特性 | RLHF | DPO |
-|------|------|-----|
-| 复杂度 | 高（需要奖励模型+PPO） | 低（直接优化） |
-| 稳定性 | 较低（PPO 训练不稳定） | 较高 |
-| 效果 | 通常更好 | 接近 RLHF |
-| 计算成本 | 高 | 低 |
+| 特性 | RLHF (PPO) | DPO | GRPO |
+|------|-----------|-----|------|
+| 复杂度 | 高（奖励模型+PPO） | 低（直接优化） | 中（无需Critic） |
+| 稳定性 | 较低 | 较高 | 较高 |
+| 效果 | 好 | 接近 RLHF | 很好（可验证任务） |
+| 计算成本 | 高 | 低 | 低 |
+| Critic模型 | 需要 | 不需要 | 不需要 |
+| 适用场景 | 通用 | 通用 | 数学/代码等可验证任务 |
 
 ---
 
@@ -504,7 +548,88 @@ class EvalCallback(TrainerCallback):
 
 ---
 
-## 4. 实际应用建议
+---
+
+## 4. 对话模板与数据格式
+
+### 4.1 为什么需要对话模板？
+
+不同模型使用不同的对话格式，因为预训练时使用的格式不同。使用 `tokenizer.apply_chat_template()` 自动处理，不要手写拼接。
+
+### 4.2 主流模型模板对比
+
+| 模型 | 模板风格 | 特点 |
+|------|---------|------|
+| **Llama-3** | `<|start_header_id|>user<|end_header_id|>...<|eot_id|>` | 支持 system prompt |
+| **Qwen** | `<|im_start|>user\n...<|im_end|>` | 中文优化 |
+| **Mistral** | `[INST] ... [/INST]` | 简洁 |
+| **DeepSeek** | `<｜User｜>...<｜Assistant｜>` | 支持推理标签 |
+
+### 4.3 标准数据格式
+
+```json
+{
+  "messages": [
+    {"role": "system", "content": "设定模型行为"},
+    {"role": "user", "content": "用户问题"},
+    {"role": "assistant", "content": "期望回答"}
+  ]
+}
+```
+
+**训练时只计算 assistant 部分的 loss**。
+
+---
+
+## 5. 推理优化技术
+
+### 5.1 KV Cache
+
+缓存已计算的 Key/Value，避免自回归生成时重复计算。显存占用约 2 × layers × heads × head_dim × seq_len × batch × 2 bytes。
+
+### 5.2 量化推理
+
+| 精度 | 显存节省 | 适用场景 |
+|------|---------|---------|
+| **FP16/BF16** | 1× | 标准推理 |
+| **INT8** | 0.5× | 精度敏感 |
+| **GPTQ/AWQ 4-bit** | 0.25× | 推荐方案 |
+
+### 5.3 推理框架
+
+| 框架 | 特点 | 适用场景 |
+|------|------|---------|
+| **vLLM** | PagedAttention，高吞吐 | 生产部署 |
+| **TensorRT-LLM** | NVIDIA 优化 | NVIDIA GPU |
+| **llama.cpp** | CPU 推理 | 边缘设备 |
+| **Ollama** | 本地运行 | 本地开发 |
+
+### 5.4 其他优化
+
+- **投机解码**：小模型生成草稿，大模型验证，加速 2-3 倍
+- **连续批处理**：动态插入请求，吞吐量提升 10-20 倍
+- **Flash Attention**：内存高效注意力计算
+
+---
+
+## 6. 核心概念速查表
+
+| 术语 | 解释 |
+|------|------|
+| **Token** | 模型处理的最小文本单位 |
+| **KV Cache** | 缓存已计算的 Key/Value 加速生成 |
+| **Temperature** | 控制采样随机性（越低越确定） |
+| **Top-p/Top-k** | 限制候选词范围的采样策略 |
+| **RoPE** | 旋转位置编码，现代主流 |
+| **Decoder-only** | 只保留 Decoder 的架构（GPT/Llama） |
+| **PEFT** | 参数高效微调（LoRA/QLoRA 等） |
+| **BF16** | Brain Float 16，训练常用精度 |
+| **Gradient Checkpointing** | 用计算换显存 |
+| **Perplexity** | 困惑度，衡量模型预测能力 |
+
+---
+
+## 7. 实际应用建议
 
 ### 4.1 选择微调还是 RAG
 
@@ -560,15 +685,18 @@ class EvalCallback(TrainerCallback):
 
 ## 参考资料
 
-1. **Transformer 论文**: "Attention Is All You Need" (Vaswani et al., 2017)
+1. **Transformer 论文**: "Attention Is All You Need" (Vaswani et al., 2017) — [arxiv:1706.03762](https://arxiv.org/abs/1706.03762)
 2. **GPT-3 论文**: "Language Models are Few-Shot Learners" (Brown et al., 2020)
-3. **LoRA 论文**: "LoRA: Low-Rank Adaptation of Large Language Models" (Hu et al., 2021)
-4. **QLoRA 论文**: "QLoRA: Efficient Finetuning of Quantized LLMs" (Dettmers et al., 2023)
-5. **DPO 论文**: "Direct Preference Optimization" (Rafailov et al., 2023)
-6. **RLHF 论文**: "Training language models to follow instructions with human feedback" (Ouyang et al., 2022)
-7. **Scaling Laws**: "Scaling Laws for Neural Language Models" (Kaplan et al., 2020)
-8. **Hugging Face PEFT**: https://huggingface.co/docs/peft
-9. **DeepLearning.AI**: https://www.deeplearning.ai/
+3. **Chinchilla 论文**: "Training Compute-Optimal Large Language Models" (Hoffmann et al., 2022) — [arxiv:2203.15556](https://arxiv.org/abs/2203.15556)
+4. **LoRA 论文**: "LoRA: Low-Rank Adaptation of Large Language Models" (Hu et al., 2021) — [arxiv:2106.09685](https://arxiv.org/abs/2106.09685)
+5. **QLoRA 论文**: "QLoRA: Efficient Finetuning of Quantized LLMs" (Dettmers et al., 2023) — [arxiv:2305.14314](https://arxiv.org/abs/2305.14314)
+6. **DPO 论文**: "Direct Preference Optimization" (Rafailov et al., 2023) — [arxiv:2305.18290](https://arxiv.org/abs/2305.18290)
+7. **DeepSeek-R1 论文**: "Incentivizing Reasoning Capability in LLMs via RL" (DeepSeek-AI, 2025) — [arxiv:2501.12948](https://arxiv.org/abs/2501.12948)
+8. **RLHF 论文**: "Training language models to follow instructions with human feedback" (Ouyang et al., 2022)
+9. **Scaling Laws**: "Scaling Laws for Neural Language Models" (Kaplan et al., 2020)
+10. **Hugging Face LLM Course**: [huggingface.co/learn/llm-course](https://huggingface.co/learn/llm-course)
+11. **Hugging Face PEFT**: [huggingface.co/docs/peft](https://huggingface.co/docs/peft)
+12. **vLLM 文档**: [docs.vllm.ai](https://docs.vllm.ai/)
 
 ---
 
@@ -584,4 +712,10 @@ class EvalCallback(TrainerCallback):
 
 4. **评估是关键**：没有好的评估，就无法判断微调是否成功。建议建立多维度的评估体系（自动指标 + 人工评估）。
 
-5. **持续学习是挑战**：当前微调方法容易导致灾难性遗忘。未来需要更好的持续学习方案，让模型能够不断吸收新知识而不遗忘旧知识。
+5. **推理优化不可忽视**：模型训练完成后，推理阶段的优化（量化、KV Cache、批处理）直接影响用户体验和成本。
+
+6. **Chat Template 是隐形陷阱**：不同模型的对话格式差异很大，使用 `apply_chat_template()` 是避免错误的最佳实践。
+
+7. **持续学习是挑战**：当前微调方法容易导致灾难性遗忘。未来需要更好的持续学习方案，让模型能够不断吸收新知识而不遗忘旧知识。
+
+8. **GRPO 值得关注**：DeepSeek-R1 的 GRPO 算法在可验证任务上表现出色，且无需 Critic 模型，大幅降低训练成本。
