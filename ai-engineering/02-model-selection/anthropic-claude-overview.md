@@ -21,11 +21,14 @@
 
 | 模型 | 上下文长度 | 特色能力 | 适用场景 | 定价（输入/输出，每 1M tokens） |
 |------|-----------|----------|----------|-------------------------------|
+| Claude 4 Sonnet | 200K | 编码、Agent、长任务 | 编程、复杂分析、Agent | $3.00 / $15.00 |
+| Claude 4 Opus | 200K | 最强推理、创意写作 | 深度研究、创意任务 | $15.00 / $75.00 |
 | Claude 3.5 Sonnet | 200K | 代码能力强、推理优秀 | 编程辅助、复杂分析 | $3.00 / $15.00 |
 | Claude 3.5 Haiku | 200K | 轻量、快速、低成本 | 简单分类、实时响应 | $0.25 / $1.25 |
-| Claude 3 Opus | 200K | 最强推理、创意写作 | 深度研究、创意任务 | $15.00 / $75.00 |
 
-> 💡 **选型口诀**：日常用 Sonnet，省钱用 Haiku，深度研究用 Opus。
+> 💡 **选型口诀**：日常用 Claude 4 Sonnet，省钱用 Haiku，深度研究用 Claude 4 Opus。
+>
+> ⚠️ **注意**：Claude 3 Opus 已被 Claude 4 Opus 取代，建议升级。
 
 ---
 
@@ -76,10 +79,10 @@ Anthropic 的核心创新，让模型通过自我批评和修正来对齐人类�
 
 ## 6. 竞品对比
 
-| 维度 | Claude 3.5 Sonnet | GPT-4o | Gemini 1.5 Pro |
-|------|-------------------|--------|----------------|
-| 上下文长度 | 200K | 128K | 1M-2M |
-| 代码能力 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+| 维度 | Claude 4 Sonnet | GPT-4.1 | Gemini 2.5 Pro |
+|------|-----------------|---------|----------------|
+| 上下文长度 | 200K | 1M | 1M |
+| 代码能力 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 | 安全性 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
 | 多模态 | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 | 中文表现 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
@@ -87,23 +90,41 @@ Anthropic 的核心创新，让模型通过自我批评和修正来对齐人类�
 
 ---
 
+## 7. 最新动态（2025-2026）
+
+### Claude 4 系列（2025年5月）
+- **Claude 4 Sonnet**：编码、Agent、长任务能力大幅提升
+- **Claude 4 Opus**：最强推理、创意写作，取代 Claude 3 Opus
+- **Claude Code**：AI 编程助手，支持终端交互
+- **Computer Use**：模型可操作计算机（点击、输入、浏览）
+
+### 核心更新
+- 更强的 Agent 能力（自主完成任务）
+- 更可靠的代码生成和审查
+- 改进的长上下文理解
+
+---
+
 ## 💡 我的思考
 
-1. **Claude 是编程首选**：Claude 3.5 Sonnet 的代码能力确实强于 GPT-4o，特别是在理解复杂代码库和生成高质量代码方面。Claude Code 的交互体验也非常出色。
+1. **Claude 4 Sonnet 是编程首选**：代码能力持续领先，加上 Claude Code 的交互体验，是开发者最佳伙伴。
 
-2. **安全是双刃剑**：Constitutional AI 让 Claude 更安全，但也导致某些合理请求被拒绝。在创意写作或开放式探索场景中，这种"过度安全"可能会限制输出质量。
+2. **Computer Use 是革命性功能**：模型可以像人一样操作计算机，这是通向通用人工智能（AGI）的重要一步。
 
-3. **长上下文是杀手级特性**：200K 上下文让 Claude 可以处理整本书、大型代码库或长对话历史。对于文档分析和代码理解任务，这是巨大优势。
+3. **安全是双刃剑**：Constitutional AI 让 Claude 更安全，但也导致某些合理请求被拒绝。在创意写作或开放式探索场景中，这种"过度安全"可能会限制输出质量。
 
-4. **生态正在追赶**：虽然工具生态不如 OpenAI，但 Anthropic 正在快速补齐（Claude Code、Artifacts、Computer Use 等功能）。
+4. **长上下文是杀手级特性**：200K 上下文让 Claude 可以处理整本书、大型代码库或长对话历史。对于文档分析和代码理解任务，这是巨大优势。
 
-5. **与 OpenAI 的差异化策略**：Anthropic 选择"安全领先"作为差异化定位，这在企业市场（特别是金融、医疗）很有吸引力。
+5. **生态正在追赶**：虽然工具生态不如 OpenAI，但 Anthropic 正在快速补齐（Claude Code、Artifacts、Computer Use 等功能）。
+
+6. **与 OpenAI 的差异化策略**：Anthropic 选择"安全领先"作为差异化定位，这在企业市场（特别是金融、医疗）很有吸引力。
 
 ---
 
 ## 参考来源
 
-- [Anthropic 官方文档](https://docs.anthropic.com/) — 访问日期：2026-06-05
-- [Anthropic Research](https://www.anthropic.com/research) — 访问日期：2026-06-05
-- [Constitutional AI 论文](https://arxiv.org/abs/2212.08073) — 访问日期：2026-06-05
-- [LMSYS Chatbot Arena](https://chat.lmsys.org/) — 访问日期：2026-06-05
+- [Anthropic 官方文档](https://docs.anthropic.com/) — 访问日期：2026-06-06
+- [Anthropic Research](https://www.anthropic.com/research) — 访问日期：2026-06-06
+- [Claude 4 发布公告](https://www.anthropic.com/news) — 访问日期：2026-06-06
+- [Constitutional AI 论文](https://arxiv.org/abs/2212.08073) — 访问日期：2026-06-06
+- [LMSYS Chatbot Arena](https://chat.lmsys.org/) — 访问日期：2026-06-06
