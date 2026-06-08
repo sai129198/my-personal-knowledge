@@ -8,7 +8,7 @@
 
 | 文件 | 状态 | 说明 |
 |------|------|------|
-| `inference-optimization.md` | 🚧 draft | 推理加速技术（量化、剪枝、蒸馏） |
+| `inference-optimization.md` | ✅ canonical | 推理加速技术（量化、KV Cache、PagedAttention、服务框架） |
 | `model-serving.md` | 🚧 draft | 模型服务化框架（vLLM、TGI、TensorRT-LLM） |
 | `api-design.md` | 🚧 draft | LLM API 设计最佳实践 |
 | `cost-optimization.md` | 🚧 draft | Token 成本分析、缓存策略、路由优化 |
