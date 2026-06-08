@@ -8,7 +8,7 @@
 
 | 文件 | 摘要 | 状态 |
 |------|------|------|
-| [rag-implementation-guide.md](rag-implementation-guide.md) | RAG 系统实现指南：从文档加载到生产部署的完整流程 | #status/draft |
+| [rag-implementation-guide](rag-implementation-guide) | RAG 系统实现指南：从文档加载到生产部署的完整流程 | #status/draft |
 
 ## 规划内容
 

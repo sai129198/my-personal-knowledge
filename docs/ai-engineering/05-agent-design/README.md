@@ -8,7 +8,7 @@
 
 | 文件 | 摘要 | 状态 |
 |------|------|------|
-| [agent-architecture-patterns.md](agent-architecture-patterns.md) | Agent 架构模式详解：ReAct、Plan-and-Execute、Multi-Agent | #status/draft |
+| [agent-architecture-patterns](agent-architecture-patterns) | Agent 架构模式详解：ReAct、Plan-and-Execute、Multi-Agent | #status/draft |
 
 ## 规划内容
 
