@@ -10,7 +10,7 @@
 |------|------|------|
 | `data-preprocessing.md` | 🚧 draft | 数据清洗、去重、格式标准化 |
 | `embedding-models.md` | 🚧 draft | 文本/多模态嵌入模型选型与微调 |
-| `vector-databases.md` | 🚧 draft | 向量数据库对比与选型 |
+| `vector-databases.md` | ✅ canonical | 向量数据库对比与选型（HNSW、IVF、PQ 算法详解） |
 | `data-labeling.md` | 🚧 draft | 标注策略、质量控制和工具链 |
 | `synthetic-data.md` | 🚧 draft | 合成数据生成技术与应用场景 |
 | `data-pipeline.md` | 🚧 draft | ETL/ELT pipeline 设计与工具 |
