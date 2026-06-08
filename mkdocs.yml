@@ -1,0 +1,188 @@
+site_name: AI Engineering Knowledge Base
+site_description: 个人 AI 工程知识库 - 从入门到精通的系统化学习笔记
+site_author: Joe
+site_url: https://sai129198.github.io/my-personal-knowledge
+
+# 仓库配置
+repo_name: sai129198/my-personal-knowledge
+repo_url: https://github.com/sai129198/my-personal-knowledge
+edit_uri: edit/main/docs/
+
+# 版权
+copyright: Copyright &copy; 2026 Joe
+
+# 主题配置
+theme:
+  name: material
+  language: zh
+  palette:
+    # 浅色模式
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切换到深色模式
+    # 深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切换到浅色模式
+  features:
+    - navigation.tabs           # 顶部标签导航
+    - navigation.sections       # 章节展开
+    - navigation.expand         # 默认展开
+    - navigation.top            # 返回顶部按钮
+    - search.suggest            # 搜索建议
+    - search.highlight          # 搜索高亮
+    - content.code.copy         # 代码复制按钮
+    - content.code.annotate     # 代码注释
+    - content.tabs.link         # 标签页联动
+  icon:
+    repo: fontawesome/brands/github
+  favicon: assets/favicon.png
+  logo: assets/logo.png
+
+# 插件
+plugins:
+  - search:
+      lang: 
+        - zh
+        - en
+
+
+# 扩展
+markdown_extensions:
+  - admonition                  # 提示框
+  - pymdownx.details            # 详情折叠
+  - pymdownx.superfences        # 代码块
+  - pymdownx.tabbed:            # 标签页
+      alternate_style: true
+  - pymdownx.highlight:         # 代码高亮
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite       # 行内代码高亮
+  - pymdownx.snippets           # 代码片段
+  - pymdownx.keys               # 键盘按键
+  - pymdownx.mark               # 文本标记
+  - pymdownx.caret              # 上标
+  - pymdownx.tilde              # 下标
+  - pymdownx.emoji:             # Emoji
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - tables                      # 表格
+  - toc:                        # 目录
+      permalink: true
+      title: 目录
+  - pymdownx.magiclink          # 自动链接
+  - attr_list                   # 属性列表
+  - md_in_html                  # HTML 中 Markdown
+  - def_list                    # 定义列表
+  - pymdownx.tasklist:          # 任务列表
+      custom_checkbox: true
+  - pymdownx.arithmatex:        # 数学公式
+      generic: true
+
+# 额外配置
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/sai129198
+  analytics:
+    provider: google
+    property: G-XXXXXXXXXX  # 如需 Google Analytics，替换为实际 ID
+  generator: false
+
+# 导航配置
+nav:
+  - 首页: index.md
+  - AI 工程:
+    - 概览: ai-engineering/README.md
+    - 01 - AI 基础:
+      - 概览: ai-engineering/01-foundations/README.md
+      - 机器学习基础: ai-engineering/01-foundations/ml-basics.md
+      - 深度学习基础: ai-engineering/01-foundations/dl-basics.md
+      - 神经网络架构: ai-engineering/01-foundations/nn-architectures.md
+      - 优化算法: ai-engineering/01-foundations/optimization.md
+    - 02 - 提示工程:
+      - 概览: ai-engineering/02-prompt-engineering/README.md
+      - 提示设计原则: ai-engineering/02-prompt-engineering/prompt-design.md
+      - 高级提示技术: ai-engineering/02-prompt-engineering/advanced-prompts.md
+      - 提示优化与评估: ai-engineering/02-prompt-engineering/prompt-optimization.md
+    - 03 - RAG 系统:
+      - 概览: ai-engineering/03-rag-systems/README.md
+      - RAG 架构设计: ai-engineering/03-rag-systems/rag-architecture.md
+      - 向量数据库: ai-engineering/03-rag-systems/vector-databases.md
+      - 检索策略: ai-engineering/03-rag-systems/retrieval-strategies.md
+      - 评估与优化: ai-engineering/03-rag-systems/evaluation-optimization.md
+    - 04 - Agent 开发:
+      - 概览: ai-engineering/04-agent-development/README.md
+      - Agent 架构模式: ai-engineering/04-agent-development/agent-patterns.md
+      - 工具调用: ai-engineering/04-agent-development/tool-calling.md
+      - 记忆系统: ai-engineering/04-agent-development/memory-systems.md
+      - 多 Agent 协作: ai-engineering/04-agent-development/multi-agent.md
+    - 05 - 模型微调:
+      - 概览: ai-engineering/05-model-fine-tuning/README.md
+      - 微调策略: ai-engineering/05-model-fine-tuning/fine-tuning-strategies.md
+      - LoRA 与 QLoRA: ai-engineering/05-model-fine-tuning/lora-qlora.md
+      - 全参数微调: ai-engineering/05-model-fine-tuning/full-finetuning.md
+      - 微调评估: ai-engineering/05-model-fine-tuning/fine-tuning-evaluation.md
+    - 06 - 模型评估:
+      - 概览: ai-engineering/06-model-evaluation/README.md
+      - 评估指标: ai-engineering/06-model-evaluation/evaluation-metrics.md
+      - 基准测试: ai-engineering/06-model-evaluation/benchmarking.md
+      - 人工评估: ai-engineering/06-model-evaluation/human-evaluation.md
+    - 07 - 数据工程:
+      - 概览: ai-engineering/07-data-engineering/README.md
+      - 数据预处理: ai-engineering/07-data-engineering/data-preprocessing.md
+      - 数据标注: ai-engineering/07-data-engineering/data-labeling.md
+      - 数据管道: ai-engineering/07-data-engineering/data-pipelines.md
+    - 08 - 生产部署:
+      - 概览: ai-engineering/08-production-deployment/README.md
+      - 部署策略: ai-engineering/08-production-deployment/deployment-strategies.md
+      - 模型服务: ai-engineering/08-production-deployment/model-serving.md
+      - 监控告警: ai-engineering/08-production-deployment/monitoring-alerting.md
+    - 09 - AI 安全:
+      - 概览: ai-engineering/09-ai-safety/README.md
+      - 提示注入防护: ai-engineering/09-ai-safety/prompt-injection.md
+      - 输出安全: ai-engineering/09-ai-safety/output-safety.md
+      - 对齐技术: ai-engineering/09-ai-safety/alignment.md
+    - 10 - 前沿技术:
+      - 概览: ai-engineering/10-emerging-tech/README.md
+      - 多模态模型: ai-engineering/10-emerging-tech/multimodal.md
+      - 代码生成: ai-engineering/10-emerging-tech/code-generation.md
+      - 推理优化: ai-engineering/10-emerging-tech/inference-optimization.md
+    - 11 - AI 产品实践:
+      - 概览: ai-engineering/11-product-practice/README.md
+      - AI 产品设计: ai-engineering/11-product-practice/ai-product-design.md
+      - 产品指标: ai-engineering/11-product-practice/ai-product-metrics.md
+      - 产品战略: ai-engineering/11-product-practice/ai-product-strategy.md
+      - 案例分析: ai-engineering/11-product-practice/ai-product-case-studies.md
+    - 12 - LLM 训练:
+      - 概览: ai-engineering/12-llm-training/README.md
+      - 预训练基础: ai-engineering/12-llm-training/pretraining.md
+      - 数据准备: ai-engineering/12-llm-training/data-preparation.md
+      - 训练基础设施: ai-engineering/12-llm-training/training-infrastructure.md
+      - 扩展定律: ai-engineering/12-llm-training/scaling-laws.md
+      - 持续预训练: ai-engineering/12-llm-training/continual-pretraining.md
+    - 13 - AI 基础设施:
+      - 概览: ai-engineering/13-ai-infrastructure/README.md
+      - 推理优化: ai-engineering/13-ai-infrastructure/inference-optimization.md
+      - 服务系统: ai-engineering/13-ai-infrastructure/serving-systems.md
+      - 云平台: ai-engineering/13-ai-infrastructure/cloud-platforms.md
+      - K8s 部署: ai-engineering/13-ai-infrastructure/kubernetes-deployment.md
+      - 监控可观测性: ai-engineering/13-ai-infrastructure/monitoring-observability.md
+
+# 额外 CSS
+extra_css:
+  - stylesheets/extra.css
+
+# 额外 JavaScript
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js

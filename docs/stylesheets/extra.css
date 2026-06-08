@@ -1,0 +1,99 @@
+/* 自定义样式 */
+
+/* 代码块优化 */
+.md-typeset code {
+  border-radius: 4px;
+  padding: 0.2em 0.4em;
+}
+
+.md-typeset pre > code {
+  border-radius: 8px;
+  padding: 1em;
+}
+
+/* 表格优化 */
+.md-typeset table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.md-typeset table th {
+  background-color: var(--md-primary-fg-color);
+  color: white;
+  font-weight: 600;
+}
+
+/* 提示框样式 */
+.md-typeset .admonition {
+  border-radius: 8px;
+  border-left-width: 4px;
+}
+
+/* 标签样式 */
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75em;
+  font-weight: 500;
+  margin-right: 4px;
+}
+
+.tag-canonical {
+  background-color: #4caf50;
+  color: white;
+}
+
+.tag-draft {
+  background-color: #ff9800;
+  color: white;
+}
+
+/* 状态指示器 */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.status-badge::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-canonical::before {
+  background-color: #4caf50;
+}
+
+.status-draft::before {
+  background-color: #ff9800;
+}
+
+/* 搜索高亮 */
+.md-search-result .md-search-result__highlight {
+  color: var(--md-accent-fg-color);
+  font-weight: 700;
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+  .md-typeset table {
+    font-size: 0.8em;
+  }
+}
+
+/* 打印优化 */
+@media print {
+  .md-sidebar,
+  .md-header,
+  .md-footer {
+    display: none;
+  }
+  
+  .md-content {
+    margin-left: 0;
+  }
+}
