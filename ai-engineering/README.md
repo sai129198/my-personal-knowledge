@@ -14,6 +14,9 @@
 | [`03-prompt-engineering/`](./03-prompt-engineering/) | Prompt 工程实践 | 模式、技巧、框架、bad case 复盘 |
 | [`04-rag-architecture/`](./04-rag-architecture/) | RAG 架构设计 | 检索策略、向量数据库、评估方法 |
 | [`05-agent-design/`](./05-agent-design/) | Agent 设计与实现 | 架构模式、工具调用、状态管理 |
+| [`06-evaluation/`](./06-evaluation/) | 模型评估与测试 | 基准测试、红队测试、A/B Test、监控 |
+| [`07-deployment/`](./07-deployment/) | AI 应用部署 | 推理优化、服务化、API 设计、成本控制 |
+| [`08-data-engineering/`](./08-data-engineering/) | 数据工程 | 预处理、嵌入模型、向量数据库、合成数据 |
 | [`99-personal/`](./99-personal/) | 个人思考、灵感、项目笔记 | 未经验证的想法、实验记录 |
 
 > 💡 **目录编号规则**：`00` 为元信息，`01-89` 为主题内容，`90-99` 为个人空间。
