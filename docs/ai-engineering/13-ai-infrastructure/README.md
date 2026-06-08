@@ -43,7 +43,7 @@
 
 - [12-llm-training](../12-llm-training/) — 训练基础设施与分布式训练
 - [11-product-practice](../11-product-practice/) — AI 产品实践与指标
-- [14-ai-safety](../14-ai-safety/) — AI 安全与对齐（即将推出）
+- 14-ai-safety — AI 安全与对齐（即将推出）
 
 ---
 

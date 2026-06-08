@@ -8,18 +8,18 @@
 
 | 目录 | 内容 | 说明 |
 |------|------|------|
-| [`00-meta/`](./00-meta/) | 术语表、模板、推荐阅读、升级路径 | 子库的基础设施 |
-| [`01-foundations/`](./01-foundations/) | AI 领域基础概念与核心技术 | 知识全景图、模型原理、评估指标 |
-| [`02-model-selection/`](./02-model-selection/) | 模型选型与对比 | 各厂商模型能力矩阵、适用场景分析 |
-| [`03-prompt-engineering/`](./03-prompt-engineering/) | Prompt 工程实践 | 模式、技巧、框架、bad case 复盘 |
-| [`04-rag-architecture/`](./04-rag-architecture/) | RAG 架构设计 | 检索策略、向量数据库、评估方法 |
-| [`05-agent-design/`](./05-agent-design/) | Agent 设计与实现 | 架构模式、工具调用、状态管理 |
-| [`06-evaluation/`](./06-evaluation/) | 模型评估与测试 | 基准测试、红队测试、A/B Test、监控 |
-| [`07-deployment/`](./07-deployment/) | AI 应用部署 | 推理优化、服务化、API 设计、成本控制 |
-| [`08-data-engineering/`](./08-data-engineering/) | 数据工程 | 预处理、嵌入模型、向量数据库、合成数据 |
-| [`09-security/`](./09-security/) | AI 安全与合规 | Prompt 注入防御、隐私保护、伦理治理 |
-| [`10-multimodal/`](./10-multimodal/) | 多模态 AI | 视觉语言模型、图像生成、语音、代码 |
-| [`99-personal/`](./99-personal/) | 个人思考、灵感、项目笔记 | 未经验证的想法、实验记录 |
+| [00-meta](00-meta/README.md) | 术语表、模板、推荐阅读、升级路径 | 子库的基础设施 |
+| [01-foundations](01-foundations/README.md) | AI 领域基础概念与核心技术 | 知识全景图、模型原理、评估指标 |
+| [02-model-selection](02-model-selection/README.md) | 模型选型与对比 | 各厂商模型能力矩阵、适用场景分析 |
+| [03-prompt-engineering](03-prompt-engineering/README.md) | Prompt 工程实践 | 模式、技巧、框架、bad case 复盘 |
+| [04-rag-architecture](04-rag-architecture/README.md) | RAG 架构设计 | 检索策略、向量数据库、评估方法 |
+| [05-agent-design](05-agent-design/README.md) | Agent 设计与实现 | 架构模式、工具调用、状态管理 |
+| [06-evaluation](06-evaluation/README.md) | 模型评估与测试 | 基准测试、红队测试、A/B Test、监控 |
+| [07-deployment](07-deployment/README.md) | AI 应用部署 | 推理优化、服务化、API 设计、成本控制 |
+| [08-data-engineering](08-data-engineering/README.md) | 数据工程 | 预处理、嵌入模型、向量数据库、合成数据 |
+| [09-security](09-security/README.md) | AI 安全与合规 | Prompt 注入防御、隐私保护、伦理治理 |
+| [10-multimodal](10-multimodal/README.md) | 多模态 AI | 视觉语言模型、图像生成、语音、代码 |
+| [99-personal](99-personal/README.md) | 个人思考、灵感、项目笔记 | 未经验证的想法、实验记录 |
 
 > 💡 **目录编号规则**：`00` 为元信息，`01-89` 为主题内容，`90-99` 为个人空间。
 
@@ -50,7 +50,7 @@
 ### 新建笔记
 
 1. 确定内容所属板块
-2. 从 [`00-meta/templates/`](./00-meta/templates/) 选择对应模板
+2. 从 [00-meta/templates](00-meta/README.md) 选择对应模板
 3. 按 `kebab-case` 命名文件，如 `chain-of-thought-prompting-guide.md`
 4. 顶部填写标签，末尾写 `## 💡 我的思考`
 5. 提交到对应板块目录

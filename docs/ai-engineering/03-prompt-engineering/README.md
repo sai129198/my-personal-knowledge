@@ -8,7 +8,7 @@
 
 | 文件 | 摘要 | 状态 |
 |------|------|------|
-| [`prompt-patterns-cheat-sheet.md`](./prompt-patterns-cheat-sheet.md) | 常用 Prompt 模式速查表：CoT、Few-Shot、ReAct、结构化输出等 | #status/draft |
+| [prompt-patterns-cheat-sheet.md](prompt-patterns-cheat-sheet.md) | 常用 Prompt 模式速查表：CoT、Few-Shot、ReAct、结构化输出等 | #status/draft |
 
 ## 规划内容
 
