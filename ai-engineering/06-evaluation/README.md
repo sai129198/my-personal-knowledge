@@ -8,7 +8,7 @@
 
 | 文件 | 状态 | 说明 |
 |------|------|------|
-| `evaluation-metrics.md` | 🚧 draft | 核心评估指标详解（BLEU、ROUGE、MRR、NDCG 等） |
+| `evaluation-metrics.md` | ✅ canonical | 核心评估指标详解（PPL、BLEU、ROUGE、RAGAS、LLM-as-a-Judge） |
 | `benchmark-testing.md` | 🚧 draft | 主流基准测试集与排行榜 |
 | `red-teaming.md` | 🚧 draft | 红队测试：对抗性评估与安全测试 |
 | `human-evaluation.md` | 🚧 draft | 人工评估方法论与众包平台 |
