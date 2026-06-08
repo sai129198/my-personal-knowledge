@@ -9,7 +9,7 @@
 | 文件/目录 | 说明 |
 |-----------|------|
 | [glossary](glossary) | 术语表：本库涉及的 AI 工程核心术语 |
-| [templates](templates/paper-note-template.md) | 内容模板：厂商画像、论文笔记、产品拆解、技术方案 |
+| [templates](templates/paper-note-template) | 内容模板：厂商画像、论文笔记、产品拆解、技术方案 |
 | [reading-list](reading-list) | 推荐阅读清单：按主题分类的书单、论文、博客、课程 |
 | [upgrade-path](upgrade-path) | 升级路径文档：从笔记到站点到 RAG 的演进规划 |
 

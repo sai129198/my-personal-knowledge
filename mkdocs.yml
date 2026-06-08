@@ -44,8 +44,6 @@ theme:
     - content.tabs.link         # 标签页联动
   icon:
     repo: fontawesome/brands/github
-  favicon: assets/favicon.png
-  logo: assets/logo.png
 
 # 插件
 plugins:
@@ -53,7 +51,6 @@ plugins:
       lang: 
         - zh
         - en
-
 
 # 扩展
 markdown_extensions:
@@ -93,70 +90,66 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/sai129198
-  analytics:
-    provider: google
-    property: G-XXXXXXXXXX  # 如需 Google Analytics，替换为实际 ID
   generator: false
 
-# 导航配置
+# 导航配置 - 只包含实际存在的文件
 nav:
   - 首页: index.md
   - AI 工程:
     - 概览: ai-engineering/README.md
+    - 00 - 元信息:
+      - 概览: ai-engineering/00-meta/README.md
+      - 术语表: ai-engineering/00-meta/glossary.md
+      - 阅读清单: ai-engineering/00-meta/reading-list.md
+      - 升级路径: ai-engineering/00-meta/upgrade-path.md
+      - 模板:
+        - 论文笔记: ai-engineering/00-meta/templates/paper-note-template.md
+        - 产品拆解: ai-engineering/00-meta/templates/product-teardown-template.md
+        - 技术方案: ai-engineering/00-meta/templates/tech-solution-template.md
+        - 厂商画像: ai-engineering/00-meta/templates/vendor-profile-template.md
     - 01 - AI 基础:
       - 概览: ai-engineering/01-foundations/README.md
-      - 机器学习基础: ai-engineering/01-foundations/ml-basics.md
-      - 深度学习基础: ai-engineering/01-foundations/dl-basics.md
-      - 神经网络架构: ai-engineering/01-foundations/nn-architectures.md
-      - 优化算法: ai-engineering/01-foundations/optimization.md
-    - 02 - 提示工程:
-      - 概览: ai-engineering/02-prompt-engineering/README.md
-      - 提示设计原则: ai-engineering/02-prompt-engineering/prompt-design.md
-      - 高级提示技术: ai-engineering/02-prompt-engineering/advanced-prompts.md
-      - 提示优化与评估: ai-engineering/02-prompt-engineering/prompt-optimization.md
-    - 03 - RAG 系统:
-      - 概览: ai-engineering/03-rag-systems/README.md
-      - RAG 架构设计: ai-engineering/03-rag-systems/rag-architecture.md
-      - 向量数据库: ai-engineering/03-rag-systems/vector-databases.md
-      - 检索策略: ai-engineering/03-rag-systems/retrieval-strategies.md
-      - 评估与优化: ai-engineering/03-rag-systems/evaluation-optimization.md
-    - 04 - Agent 开发:
-      - 概览: ai-engineering/04-agent-development/README.md
-      - Agent 架构模式: ai-engineering/04-agent-development/agent-patterns.md
-      - 工具调用: ai-engineering/04-agent-development/tool-calling.md
-      - 记忆系统: ai-engineering/04-agent-development/memory-systems.md
-      - 多 Agent 协作: ai-engineering/04-agent-development/multi-agent.md
-    - 05 - 模型微调:
-      - 概览: ai-engineering/05-model-fine-tuning/README.md
-      - 微调策略: ai-engineering/05-model-fine-tuning/fine-tuning-strategies.md
-      - LoRA 与 QLoRA: ai-engineering/05-model-fine-tuning/lora-qlora.md
-      - 全参数微调: ai-engineering/05-model-fine-tuning/full-finetuning.md
-      - 微调评估: ai-engineering/05-model-fine-tuning/fine-tuning-evaluation.md
+      - AI 知识全景图: ai-engineering/01-foundations/ai-knowledge-landscape.md
+      - AI Infra 全景图: ai-engineering/01-foundations/ai-infra-landscape.md
+      - AI 应用层全景图: ai-engineering/01-foundations/ai-application-layer.md
+      - LLM 原理与微调: ai-engineering/01-foundations/llm-principles-training-finetuning.md
+    - 02 - 模型选型:
+      - 概览: ai-engineering/02-model-selection/README.md
+      - OpenAI GPT: ai-engineering/02-model-selection/openai-gpt-overview.md
+      - Anthropic Claude: ai-engineering/02-model-selection/anthropic-claude-overview.md
+      - Google Gemini: ai-engineering/02-model-selection/google-gemini-overview.md
+      - DeepSeek: ai-engineering/02-model-selection/deepseek-overview.md
+      - 选型框架: ai-engineering/02-model-selection/model-selection-framework.md
+      - 行业趋势 2026: ai-engineering/02-model-selection/industry-trends-2026.md
+    - 03 - 提示工程:
+      - 概览: ai-engineering/03-prompt-engineering/README.md
+      - 提示模式速查: ai-engineering/03-prompt-engineering/prompt-patterns-cheat-sheet.md
+    - 04 - RAG 架构:
+      - 概览: ai-engineering/04-rag-architecture/README.md
+      - RAG 实现指南: ai-engineering/04-rag-architecture/rag-implementation-guide.md
+    - 05 - Agent 设计:
+      - 概览: ai-engineering/05-agent-design/README.md
+      - Agent 架构模式: ai-engineering/05-agent-design/agent-architecture-patterns.md
     - 06 - 模型评估:
-      - 概览: ai-engineering/06-model-evaluation/README.md
-      - 评估指标: ai-engineering/06-model-evaluation/evaluation-metrics.md
-      - 基准测试: ai-engineering/06-model-evaluation/benchmarking.md
-      - 人工评估: ai-engineering/06-model-evaluation/human-evaluation.md
-    - 07 - 数据工程:
-      - 概览: ai-engineering/07-data-engineering/README.md
-      - 数据预处理: ai-engineering/07-data-engineering/data-preprocessing.md
-      - 数据标注: ai-engineering/07-data-engineering/data-labeling.md
-      - 数据管道: ai-engineering/07-data-engineering/data-pipelines.md
-    - 08 - 生产部署:
-      - 概览: ai-engineering/08-production-deployment/README.md
-      - 部署策略: ai-engineering/08-production-deployment/deployment-strategies.md
-      - 模型服务: ai-engineering/08-production-deployment/model-serving.md
-      - 监控告警: ai-engineering/08-production-deployment/monitoring-alerting.md
+      - 概览: ai-engineering/06-evaluation/README.md
+      - 评估指标: ai-engineering/06-evaluation/evaluation-metrics.md
+    - 07 - 部署优化:
+      - 概览: ai-engineering/07-deployment/README.md
+      - 推理优化: ai-engineering/07-deployment/inference-optimization.md
+    - 08 - 数据工程:
+      - 概览: ai-engineering/08-data-engineering/README.md
+      - 向量数据库: ai-engineering/08-data-engineering/vector-databases.md
     - 09 - AI 安全:
-      - 概览: ai-engineering/09-ai-safety/README.md
-      - 提示注入防护: ai-engineering/09-ai-safety/prompt-injection.md
-      - 输出安全: ai-engineering/09-ai-safety/output-safety.md
-      - 对齐技术: ai-engineering/09-ai-safety/alignment.md
-    - 10 - 前沿技术:
-      - 概览: ai-engineering/10-emerging-tech/README.md
-      - 多模态模型: ai-engineering/10-emerging-tech/multimodal.md
-      - 代码生成: ai-engineering/10-emerging-tech/code-generation.md
-      - 推理优化: ai-engineering/10-emerging-tech/inference-optimization.md
+      - 概览: ai-engineering/09-security/README.md
+      - 提示注入防御: ai-engineering/09-security/prompt-injection-defense.md
+    - 10 - 多模态:
+      - 概览: ai-engineering/10-multimodal/README.md
+      - 代码生成: ai-engineering/10-multimodal/code-generation.md
+      - 图像生成: ai-engineering/10-multimodal/image-generation.md
+      - 多模态 RAG: ai-engineering/10-multimodal/multimodal-rag.md
+      - 语音识别与合成: ai-engineering/10-multimodal/speech-recognition-synthesis.md
+      - 视频理解: ai-engineering/10-multimodal/video-understanding.md
+      - 视觉语言模型: ai-engineering/10-multimodal/vision-language-models.md
     - 11 - AI 产品实践:
       - 概览: ai-engineering/11-product-practice/README.md
       - AI 产品设计: ai-engineering/11-product-practice/ai-product-design.md
@@ -177,6 +170,11 @@ nav:
       - 云平台: ai-engineering/13-ai-infrastructure/cloud-platforms.md
       - K8s 部署: ai-engineering/13-ai-infrastructure/kubernetes-deployment.md
       - 监控可观测性: ai-engineering/13-ai-infrastructure/monitoring-observability.md
+    - 99 - 个人笔记:
+      - 概览: ai-engineering/99-personal/README.md
+      - 学习笔记 2026-06-05: ai-engineering/99-personal/study-notes-2026-06-05.md
+      - 学习笔记 2026-06-06: ai-engineering/99-personal/study-notes-2026-06-06.md
+      - LLM 学习笔记: ai-engineering/99-personal/study-notes-2026-06-06-llm.md
 
 # 额外 CSS
 extra_css:
