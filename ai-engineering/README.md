@@ -18,6 +18,7 @@
 | [`07-deployment/`](./07-deployment/) | AI 应用部署 | 推理优化、服务化、API 设计、成本控制 |
 | [`08-data-engineering/`](./08-data-engineering/) | 数据工程 | 预处理、嵌入模型、向量数据库、合成数据 |
 | [`09-security/`](./09-security/) | AI 安全与合规 | Prompt 注入防御、隐私保护、伦理治理 |
+| [`10-multimodal/`](./10-multimodal/) | 多模态 AI | 视觉语言模型、图像生成、语音、代码 |
 | [`99-personal/`](./99-personal/) | 个人思考、灵感、项目笔记 | 未经验证的想法、实验记录 |
 
 > 💡 **目录编号规则**：`00` 为元信息，`01-89` 为主题内容，`90-99` 为个人空间。
