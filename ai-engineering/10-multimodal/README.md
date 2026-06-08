@@ -13,7 +13,7 @@
 | `speech-recognition-synthesis.md` | ✅ canonical | 语音识别与合成（Whisper、ASR、TTS、声音克隆） |
 | `code-generation.md` | ✅ canonical | 代码生成模型与工具（Copilot、Code Llama、Cursor） |
 | `multimodal-rag.md` | ✅ canonical | 多模态 RAG 架构设计（CLIP、跨模态检索、融合策略） |
-| `video-understanding.md` | 🚧 draft | 视频理解与生成 |
+| `video-understanding.md` | ✅ canonical | 视频理解与生成（VideoMAE、Video-LLaVA、Sora） |
 
 ---
 
