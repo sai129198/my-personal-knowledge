@@ -1,350 +1,484 @@
-# 模型评估指标详解
+# 评估指标详解
 
-> **一句话定位**：从困惑度到 LLM-as-a-Judge，系统梳理 AI 模型评估的核心指标与适用场景。
+> **一句话定位**：掌握 NLP 和 LLM 评估指标，选择最适合的指标衡量模型性能。
 >
-> #status/draft #topic/evaluation #topic/llm #year/2026
+> #status/canonical #topic/evaluation #topic/metrics #year/2026
 
 ---
 
-## 一、基础概念：信息论视角
+## 1. 基础指标
 
-### 1.1 熵 (Entropy)
+### 1.1 精确匹配（Exact Match）
 
-熵衡量的是"平均信息量"，由香农提出。对于语言模型而言：
-
-- **高熵** → 模型对下一个词预测很"不确定"
-- **低熵** → 模型对下一个词预测很"自信"
-
-人类语言的熵约为 **1.0-1.5 bits/字符**（英文），这是理论下限。
-
-### 1.2 交叉熵 (Cross-Entropy)
-
-衡量模型分布与真实分布的差异：
-
-$$H(P, Q) = -\sum_{x} P(x) \log Q(x)$$
-
-其中 $P$ 是真实分布，$Q$ 是模型预测分布。**交叉熵越低，模型越好**。
-
-### 1.3 困惑度 (Perplexity, PPL)
-
-**最经典的语言模型评估指标**。
-
-$$PPL(X) = \exp\left(-\frac{1}{t}\sum_{i=1}^{t} \log p_\theta(x_i|x_{<i})\right)$$
-
-**直观理解**：模型面临的一个"分支选择"的平均数量。
-
-- PPL = 100 → 相当于每次面对100个等概率选择
-- PPL = 2 → 相当于每次面对2个选择（接近确定）
-
-**⚠️ 关键注意事项**：
-1. **分词方式影响巨大**：Word-level vs Character-level vs Subword-level 不可直接比较
-2. **仅适用于自回归模型**：BERT 等掩码模型不适用
-3. **与 BPC 的关系**：$PPL = 2^{BPC}$（当使用字符级分词时）
-
----
-
-## 二、生成任务指标
-
-### 2.1 BLEU (Bilingual Evaluation Understudy)
-
-**用途**：机器翻译、文本生成质量评估
-
-**核心思想**：比较候选文本与参考文本的 n-gram 重叠度
-
-$$BLEU = BP \times \exp\left(\sum_{n=1}^{N} w_n \log p_n\right)$$
-
-其中：
-- $p_n$：n-gram 精确率
-- $BP$：简短惩罚因子（Brevity Penalty）
-- $w_n$：权重（通常 $N=4$，均匀权重）
-
-**优点**：
-- 计算快速，可复现
-- 与人工评估有一定相关性
-
-**缺点**：
-- ❌ 不考虑语义，只看重词重叠
-- ❌ 对同义词不敏感（"good" vs "great" 算不同）
-- ❌ 需要参考文本，且质量依赖参考文本数量
-
-**适用场景**：机器翻译、摘要生成（有参考文本时）
-
-### 2.2 ROUGE (Recall-Oriented Understudy for Gisting Evaluation)
-
-**用途**：文本摘要评估
-
-**核心思想**：基于召回率，衡量候选摘要与参考摘要的重叠
-
-| 变体 | 计算方式 | 特点 |
-|------|----------|------|
-| ROUGE-1 | 1-gram 重叠 | 最基础 |
-| ROUGE-2 | 2-gram 重叠 | 考虑局部词序 |
-| ROUGE-L | 最长公共子序列 (LCS) | 考虑词序，更灵活 |
-| ROUGE-SU | Skip-bigram + Unigram | 允许词间有间隔 |
-
-**与 BLEU 的区别**：
-- BLEU 偏向精确率（Precision）
-- ROUGE 偏向召回率（Recall）
-
-### 2.3 METEOR
-
-**改进点**：解决 BLEU 的不足
-
-- 支持**同义词匹配**（WordNet）
-- 支持**词干提取**（stemming）
-- 引入召回率，F-score 平衡
-
-$$METEOR = F_{mean} \times (1 - Penalty)$$
-
-**适用场景**：机器翻译（比 BLEU 更接近人工判断）
-
----
-
-## 三、检索任务指标
-
-### 3.1 Precision@K
-
-$$Precision@K = \frac{True\ Positives@K}{K}$$
-
-**含义**：前 K 个结果中，有多少是相关的。
-
-**适用场景**：搜索引擎、推荐系统（用户只看前 K 个结果）
-
-### 3.2 Recall@K
-
-$$Recall@K = \frac{True\ Positives@K}{Total\ Relevant\ Documents}$$
-
-**含义**：所有相关文档中，有多少被召回在前 K 个结果里。
-
-### 3.3 Mean Reciprocal Rank (MRR)
-
-$$MRR = \frac{1}{|Q|} \sum_{i=1}^{|Q|} \frac{1}{rank_i}$$
-
-**含义**：第一个相关结果的排名的倒数平均值。
-
-**适用场景**：问答系统、对话系统（用户通常只关心第一个正确答案）
-
-### 3.4 Normalized Discounted Cumulative Gain (NDCG)
-
-**核心思想**：
-1. 相关文档有**分级相关性**（不是二元的）
-2. 排名越靠前，权重越高（Discount）
-
-$$DCG@K = \sum_{i=1}^{K} \frac{2^{rel_i} - 1}{\log_2(i+1)}$$
-
-$$NDCG@K = \frac{DCG@K}{IDCG@K}$$
-
-**适用场景**：搜索引擎、推荐系统（结果有相关性分级时）
-
-### 3.5 Mean Average Precision (MAP)
-
-$$AP = \sum_{k} Precision@k \times \Delta Recall@k$$
-
-$$MAP = \frac{1}{|Q|} \sum_{q} AP(q)$$
-
-**适用场景**：信息检索（需要综合考虑 Precision 和 Recall）
-
----
-
-## 四、RAG 系统评估指标
-
-### 4.1 检索组件指标
-
-| 指标 | 含义 | 使用场景 |
-|------|------|----------|
-| Context Precision | 检索到的上下文中有多少是相关的 | 评估检索器质量 |
-| Context Recall | 相关文档有多少被检索到 | 评估召回能力 |
-| Context Relevance | 上下文与问题的相关性 | 端到端评估 |
-
-### 4.2 生成组件指标
-
-| 指标 | 含义 | 使用场景 |
-|------|------|----------|
-| Faithfulness | 生成内容是否忠实于检索到的上下文 | 检测幻觉 |
-| Answer Relevance | 答案是否回答了问题 | 评估回答质量 |
-| Answer Correctness | 答案是否正确（有标准答案时） | 问答系统 |
-
-### 4.3 RAGAS 框架
-
-**RAGAS** 是专门为 RAG 设计的评估框架：
+最简单的评估方式，预测与参考答案完全一致才算正确。
 
 ```python
-from ragas import evaluate
-from ragas.metrics import (
-    faithfulness,
-    answer_relevancy,
-    context_relevancy,
-    context_recall
-)
+def exact_match(prediction: str, reference: str) -> bool:
+    """
+    精确匹配
+    """
+    return prediction.strip().lower() == reference.strip().lower()
 
-result = evaluate(
-    dataset=eval_dataset,
-    metrics=[faithfulness, answer_relevancy, context_relevancy, context_recall]
-)
+def exact_match_score(predictions: List[str], references: List[str]) -> float:
+    """
+    计算精确匹配分数
+    """
+    matches = sum(
+        1 for pred, ref in zip(predictions, references)
+        if exact_match(pred, ref)
+    )
+    return matches / len(predictions)
+```
+
+**适用场景**：
+- 问答系统（抽取式）
+- 分类任务
+- 简单推理任务
+
+**局限性**：
+- 对表述变化敏感（"北京" vs "北京市"）
+- 无法评估生成质量
+
+---
+
+### 1.2 F1 Score
+
+基于 token 级别的精确率和召回率。
+
+```python
+def token_f1(prediction: str, reference: str) -> float:
+    """
+    计算 Token-level F1
+    """
+    pred_tokens = set(prediction.lower().split())
+    ref_tokens = set(reference.lower().split())
+    
+    if not pred_tokens or not ref_tokens:
+        return 0.0
+    
+    common = pred_tokens & ref_tokens
+    
+    precision = len(common) / len(pred_tokens)
+    recall = len(common) / len(ref_tokens)
+    
+    if precision + recall == 0:
+        return 0.0
+    
+    return 2 * precision * recall / (precision + recall)
+```
+
+---
+
+## 2. N-gram 重叠指标
+
+### 2.1 BLEU
+
+BLEU（Bilingual Evaluation Understudy）基于 n-gram 精确率。
+
+```python
+from collections import Counter
+import math
+
+def bleu_score(prediction: str, references: List[str], max_n: int = 4) -> float:
+    """
+    计算 BLEU 分数
+    
+    Args:
+        prediction: 预测文本
+        references: 参考文本列表
+        max_n: 最大 n-gram 阶数
+    """
+    pred_tokens = prediction.split()
+    ref_tokens_list = [ref.split() for ref in references]
+    
+    # 计算 n-gram 精确率
+    precisions = []
+    for n in range(1, max_n + 1):
+        pred_ngrams = Counter(get_ngrams(pred_tokens, n))
+        
+        # 计算最大匹配数
+        max_matches = Counter()
+        for ref_tokens in ref_tokens_list:
+            ref_ngrams = Counter(get_ngrams(ref_tokens, n))
+            for ngram in pred_ngrams:
+                max_matches[ngram] = max(max_matches[ngram], ref_ngrams[ngram])
+        
+        # 计算匹配数
+        matches = sum(min(pred_ngrams[ngram], max_matches[ngram]) 
+                     for ngram in pred_ngrams)
+        total = sum(pred_ngrams.values())
+        
+        if total == 0:
+            precisions.append(0)
+        else:
+            precisions.append(matches / total)
+    
+    # 几何平均
+    if min(precisions) == 0:
+        return 0.0
+    
+    geo_mean = math.exp(sum(math.log(p) for p in precisions) / len(precisions))
+    
+    # 简短惩罚
+    bp = brevity_penalty(len(pred_tokens), 
+                         min(len(ref) for ref in ref_tokens_list))
+    
+    return bp * geo_mean
+
+def get_ngrams(tokens: List[str], n: int) -> List[tuple]:
+    """获取 n-grams"""
+    return [tuple(tokens[i:i+n]) for i in range(len(tokens)-n+1)]
+
+def brevity_penalty(pred_len: int, ref_len: int) -> float:
+    """简短惩罚"""
+    if pred_len > ref_len:
+        return 1.0
+    return math.exp(1 - ref_len / pred_len) if pred_len > 0 else 0.0
 ```
 
 **特点**：
-- 无需人工标注参考答案
-- 使用 LLM 作为评判者（LLM-as-a-Judge）
-- 适合持续监控 RAG 系统性能
+- 优点：计算快速，与人工评估有一定相关性
+- 缺点：不考虑语义，对同义词不敏感
 
----
+**适用场景**：机器翻译、文本摘要
 
-## 五、LLM-as-a-Judge：现代评估范式
+### 2.2 ROUGE
 
-### 5.1 为什么传统指标不够？
-
-| 问题 | 说明 |
-|------|------|
-| 语义理解 | BLEU/ROUGE 无法捕捉语义相似性 |
-| 开放性生成 | 没有唯一标准答案 |
-| 多维度质量 | 需要同时评估正确性、流畅性、安全性等 |
-| 成本 | 人工评估昂贵且不可扩展 |
-
-### 5.2 LLM-as-a-Judge 原理
-
-**核心思想**：用更强的 LLM（如 GPT-4）来评估较弱 LLM 的输出。
-
-**常见方法**：
-
-#### G-Eval (LLM Evaluation with GPT-4)
+ROUGE（Recall-Oriented Understudy for Gisting Evaluation）基于召回率。
 
 ```python
-# 定义评估维度
-EVALUATION_PROMPT = """
-You will be given one summary written for an article. 
-Your task is to rate the summary on one metric.
+def rouge_n(prediction: str, reference: str, n: int = 1) -> Dict[str, float]:
+    """
+    计算 ROUGE-N
+    
+    Returns:
+        {'precision': float, 'recall': float, 'f1': float}
+    """
+    pred_tokens = prediction.split()
+    ref_tokens = reference.split()
+    
+    pred_ngrams = Counter(get_ngrams(pred_tokens, n))
+    ref_ngrams = Counter(get_ngrams(ref_tokens, n))
+    
+    matches = sum((pred_ngrams & ref_ngrams).values())
+    
+    precision = matches / sum(pred_ngrams.values()) if pred_ngrams else 0
+    recall = matches / sum(ref_ngrams.values()) if ref_ngrams else 0
+    
+    f1 = 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else 0
+    
+    return {'precision': precision, 'recall': recall, 'f1': f1}
 
-Please make sure you read and understand these instructions very carefully.
+def rouge_l(prediction: str, reference: str) -> Dict[str, float]:
+    """
+    计算 ROUGE-L（最长公共子序列）
+    """
+    pred_tokens = prediction.split()
+    ref_tokens = reference.split()
+    
+    lcs_length = longest_common_subsequence(pred_tokens, ref_tokens)
+    
+    precision = lcs_length / len(pred_tokens) if pred_tokens else 0
+    recall = lcs_length / len(ref_tokens) if ref_tokens else 0
+    
+    f1 = 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else 0
+    
+    return {'precision': precision, 'recall': recall, 'f1': f1}
 
-Evaluation Criteria:
-Coherence (1-5) - the collective quality of all sentences.
-
-Evaluation Steps:
-1. Read the article carefully and identify the main topic and key points.
-2. Read the summary and compare it to the article. 
-3. Assign a score for coherence.
-
-Article: {article}
-Summary: {summary}
-
-Score:"""
+def longest_common_subsequence(seq1: List, seq2: List) -> int:
+    """计算最长公共子序列长度"""
+    m, n = len(seq1), len(seq2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if seq1[i-1] == seq2[j-1]:
+                dp[i][j] = dp[i-1][j-1] + 1
+            else:
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+    
+    return dp[m][n]
 ```
 
-**优点**：
-- 可评估任意维度（只需定义标准）
-- 与人类判断相关性高（>0.8）
+**特点**：
+- ROUGE-1：unigram 重叠
+- ROUGE-2：bigram 重叠
+- ROUGE-L：最长公共子序列
 
-**缺点**：
-- 需要调用 API，有成本
-- 存在位置偏见（prefer 第一个选项）
-- 可能过于宽容（对相似模型的输出）
-
-### 5.3 减少偏见的技术
-
-| 技术 | 说明 |
-|------|------|
-| **交换位置** | 交换候选答案顺序，取平均 |
-| **多轮评估** | 多次采样，取多数投票 |
-| **明确标准** | 提供详细的评分 rubric |
-| **参考对比** | 与标准答案或人类答案对比 |
+**适用场景**：文本摘要、文本生成
 
 ---
 
-## 六、指标选择决策树
+## 3. 语义相似度指标
 
-```
-你有标准参考答案吗？
-├── 有 → 是生成任务吗？
-│   ├── 是 → 需要语义相似性吗？
-│   │   ├── 是 → LLM-as-a-Judge / BERTScore
-│   │   └── 否 → BLEU / ROUGE / METEOR
-│   └── 否 → 检索任务？
-│       ├── 是 → Precision@K / Recall@K / NDCG / MRR
-│       └── 否 → 分类任务？
-│           └── 是 → Accuracy / F1 / AUC-ROC
-└── 无 → 是 RAG 系统吗？
-    ├── 是 → RAGAS (Faithfulness, Relevance)
-    └── 否 → 开放式生成？
-        ├── 是 → LLM-as-a-Judge
-        └── 否 → 人工评估
+### 3.1 BERTScore
+
+基于 BERT 嵌入的相似度计算。
+
+```python
+from bert_score import score
+
+# 计算 BERTScore
+P, R, F1 = score(
+    predictions,  # 预测文本列表
+    references,   # 参考文本列表
+    lang="zh",    # 语言
+    model_type="bert-base-chinese",  # 模型
+    verbose=True
+)
+
+print(f"Precision: {P.mean():.4f}")
+print(f"Recall: {R.mean():.4f}")
+print(f"F1: {F1.mean():.4f}")
 ```
 
----
+**特点**：
+- 优点：考虑语义，对同义词敏感
+- 缺点：计算较慢，需要 GPU
 
-## 七、实践建议
+**适用场景**：通用文本生成评估
 
-### 7.1 不要依赖单一指标
+### 3.2 MoverScore
 
-**反例**：BLEU 高 ≠ 质量好
+基于 Word Mover's Distance 的相似度。
 
+```python
+from moverscore_v2 import get_idf_dict, word_mover_score
+
+# 计算 IDF
+idf_dict_hyp = get_idf_dict(predictions)
+idf_dict_ref = get_idf_dict(references)
+
+# 计算 MoverScore
+scores = word_mover_score(
+    references,
+    predictions,
+    idf_dict_ref,
+    idf_dict_hyp,
+    stop_words=[],
+    n_gram=1,
+    remove_subwords=True
+)
 ```
-参考：The cat sat on the mat.
-候选1：The cat sat on the mat. (BLEU=1.0, 完美)
-候选2：On the mat sat the cat. (BLEU≈0.3, 但语义等价)
-候选3：The the the the the. (BLEU可能很高, 但毫无意义)
+
+### 3.3 Sentence-BERT 相似度
+
+```python
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
+
+# 加载模型
+model = SentenceTransformer('all-MiniLM-L6-v2')
+
+# 编码
+pred_embeddings = model.encode(predictions)
+ref_embeddings = model.encode(references)
+
+# 计算余弦相似度
+similarities = cosine_similarity(pred_embeddings, ref_embeddings)
 ```
 
-### 7.2 建立评估基线
+---
 
-1. **人类评估分数**（黄金标准）
-2. **简单基线模型**（如随机选择、TF-IDF）
-3. **当前生产模型**（对比改进）
+## 4. LLM 专用指标
 
-### 7.3 持续监控指标
+### 4.1 困惑度（Perplexity）
 
-| 监控项 | 方法 |
-|--------|------|
-| 数据漂移 | 输入分布变化检测 |
-| 概念漂移 | 模型输出分布变化 |
-| 性能退化 | 关键指标趋势监控 |
-| 异常样本 | 离群点检测 |
+衡量模型对文本的预测能力。
+
+```python
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+def calculate_perplexity(text: str, model, tokenizer) -> float:
+    """
+    计算困惑度
+    """
+    encodings = tokenizer(text, return_tensors="pt")
+    
+    with torch.no_grad():
+        outputs = model(**encodings, labels=encodings.input_ids)
+        loss = outputs.loss
+    
+    perplexity = torch.exp(loss).item()
+    return perplexity
+
+# 使用
+model = AutoModelForCausalLM.from_pretrained("gpt2")
+tokenizer = AutoTokenizer.from_pretrained("gpt2")
+
+ppl = calculate_perplexity("This is a test sentence.", model, tokenizer)
+print(f"Perplexity: {ppl:.2f}")
+```
+
+**解读**：
+- 困惑度越低越好
+- 与训练数据的分布有关
+- 不能直接比较不同模型的困惑度
+
+### 4.2 多样性指标
+
+```python
+def distinct_n(predictions: List[str], n: int = 2) -> float:
+    """
+    计算 Distinct-N（n-gram 多样性）
+    """
+    all_ngrams = set()
+    total_ngrams = 0
+    
+    for text in predictions:
+        tokens = text.split()
+        ngrams = get_ngrams(tokens, n)
+        all_ngrams.update(ngrams)
+        total_ngrams += len(ngrams)
+    
+    return len(all_ngrams) / total_ngrams if total_ngrams > 0 else 0.0
+
+def self_bleu(predictions: List[str]) -> float:
+    """
+    计算 Self-BLEU（衡量生成多样性）
+    """
+    scores = []
+    for i, pred in enumerate(predictions):
+        refs = predictions[:i] + predictions[i+1:]
+        scores.append(bleu_score(pred, refs))
+    
+    return sum(scores) / len(scores)
+```
 
 ---
 
-## 八、工具推荐
+## 5. 任务特定指标
 
-| 工具 | 用途 | 链接 |
-|------|------|------|
-| **DeepEval** | LLM 评估框架（开源） | https://github.com/confident-ai/deepeval |
-| **RAGAS** | RAG 评估 | https://docs.ragas.io/ |
-| **OpenAI Evals** | 基准测试注册表 | https://github.com/openai/evals |
-| **BERTScore** | 语义相似度 | https://github.com/Tiiiger/bert_score |
-| **sacreBLEU** | 标准化 BLEU | https://github.com/mjpost/sacrebleu |
+### 5.1 问答任务
+
+```python
+def qa_f1_score(prediction: str, ground_truths: List[str]) -> float:
+    """
+    问答任务的 F1 分数
+    """
+    pred_tokens = set(prediction.lower().split())
+    
+    scores = []
+    for ground_truth in ground_truths:
+        gt_tokens = set(ground_truth.lower().split())
+        
+        common = pred_tokens & gt_tokens
+        
+        if not common:
+            scores.append(0)
+            continue
+        
+        precision = len(common) / len(pred_tokens)
+        recall = len(common) / len(gt_tokens)
+        
+        f1 = 2 * precision * recall / (precision + recall)
+        scores.append(f1)
+    
+    return max(scores)
+```
+
+### 5.2 代码生成
+
+```python
+def code_bleu(predictions: List[str], references: List[str]) -> float:
+    """
+    CodeBLEU：针对代码生成的评估指标
+    """
+    from codebleu import calc_codebleu
+    
+    result = calc_codebleu(
+        references,
+        predictions,
+        lang="python",
+        weights=(0.25, 0.25, 0.25, 0.25),
+        tokenizer=None
+    )
+    
+    return result['codebleu']
+```
+
+### 5.3 事实准确性
+
+```python
+def fact_accuracy(prediction: str, facts: List[str]) -> float:
+    """
+    事实准确性评估
+    """
+    # 使用 NLI 模型判断事实是否被支持
+    from transformers import pipeline
+    
+    nli = pipeline("text-classification", model="facebook/bart-large-mnli")
+    
+    correct = 0
+    for fact in facts:
+        # 判断预测是否包含事实
+        result = nli(f"{prediction} [SEP] {fact}")
+        if result[0]['label'] == 'ENTAILMENT':
+            correct += 1
+    
+    return correct / len(facts)
+```
 
 ---
 
-## 💡 我的思考
+## 6. 指标选择指南
 
-### 关键洞察
+### 6.1 选择矩阵
 
-1. **指标是手段，不是目的**：选择指标要服务于业务目标，不要为了指标而优化
-2. **LLM-as-a-Judge 是趋势**：但需要注意偏见和成本，建议与传统指标结合使用
-3. **RAG 评估需要分层**：检索和生成要分开评估，才能定位问题
+| 任务类型 | 推荐指标 | 备选指标 |
+|----------|----------|----------|
+| **机器翻译** | BLEU | TER, METEOR |
+| **文本摘要** | ROUGE | BERTScore |
+| **对话生成** | BERTScore | 人工评估 |
+| **代码生成** | CodeBLEU | Pass@k |
+| **问答系统** | EM / F1 | BERTScore |
+| **事实核查** | 准确率 | F1 |
 
-### 常见陷阱
+### 6.2 综合评估
 
-- ❌ 用 BLEU 评估对话质量（对话没有标准答案）
-- ❌ 用 PPL 比较不同分词器的模型
-- ❌ 忽视指标之间的相关性（高 BLEU 不一定高人工分）
-
-### 下一步学习
-
-- [ ] 深入研究 RAGAS 源码实现
-- [ ] 实践 LLM-as-a-Judge 的位置偏见实验
-- [ ] 建立自己业务的评估指标体系
+```python
+class ComprehensiveEvaluator:
+    """
+    综合评估器
+    """
+    
+    def __init__(self):
+        self.metrics = {
+            'bleu': bleu_score,
+            'rouge': rouge_l,
+            'bertscore': self._bertscore,
+            'distinct': distinct_n
+        }
+    
+    def evaluate(self, predictions: List[str], references: List[str]) -> Dict:
+        """
+        综合评估
+        """
+        results = {}
+        
+        for name, metric_func in self.metrics.items():
+            try:
+                results[name] = metric_func(predictions, references)
+            except Exception as e:
+                results[name] = f"Error: {e}"
+        
+        return results
+    
+    def _bertscore(self, predictions, references):
+        from bert_score import score
+        P, R, F1 = score(predictions, references, lang="zh")
+        return {'precision': P.mean().item(), 
+                'recall': R.mean().item(), 
+                'f1': F1.mean().item()}
+```
 
 ---
 
-## 参考来源
+## 参考资源
 
-1. Hugging Face - Perplexity of fixed-length models (2024)
-2. The Gradient - Understanding Evaluation Metrics for Language Models (2019)
-3. Pinecone - RAG Evaluation: Don't let customers tell you first (2024)
-4. Confident AI - LLM Evaluation Metrics: The Ultimate Guide (2024)
-5. Hugging Face Cookbook - RAG Evaluation (2024)
-6. OpenAI Evals - Framework for evaluating LLMs (GitHub)
-
----
-
-*最后更新：2026-06-08*
+- [BLEU: A Method for Automatic Evaluation of Machine Translation](https://aclanthology.org/P02-1040/) - Papineni et al., 2002
+- [ROUGE: A Package for Automatic Evaluation of Summaries](https://aclanthology.org/W04-1013/) - Lin, 2004
+- [BERTScore: Evaluating Text Generation with BERT](https://arxiv.org/abs/1904.09675) - Zhang et al., 2019
+- [MoverScore: Text Generation Evaluating with Contextualized Embeddings and Earth Mover Distance](https://arxiv.org/abs/1909.02622) - Zhao et al., 2019
+- [CodeBLEU: a Method for Automatic Evaluation of Code Synthesis](https://arxiv.org/abs/2009.10297) - Ren et al., 2020

@@ -1,6 +1,8 @@
 # 06 - 模型评估与测试
 
-> **一句话定位**：AI 模型的"体检中心"——从基准测试到生产环境监控的全链路评估方法论。
+> **一句话定位**：建立全面的 LLM 评估体系，从基准测试到生产监控，量化模型能力。
+>
+> #status/canonical #topic/evaluation #topic/benchmark #topic/testing #year/2026
 
 ---
 
@@ -8,12 +10,12 @@
 
 | 文件 | 状态 | 说明 |
 |------|------|------|
-| `evaluation-metrics.md` | ✅ canonical | 核心评估指标详解（PPL、BLEU、ROUGE、RAGAS、LLM-as-a-Judge） |
-| `benchmark-testing.md` | 🚧 draft | 主流基准测试集与排行榜 |
-| `red-teaming.md` | 🚧 draft | 红队测试：对抗性评估与安全测试 |
-| `human-evaluation.md` | 🚧 draft | 人工评估方法论与众包平台 |
-| `ab-testing.md` | 🚧 draft | 生产环境 A/B 测试设计与分析 |
-| `monitoring-observability.md` | 🚧 draft | 线上监控、漂移检测与告警 |
+| `evaluation-metrics.md` | ✅ canonical | 评估指标详解（BLEU、ROUGE、BERTScore 等） |
+| `benchmark-suites.md` | ✅ canonical | 主流基准测试套件（MMLU、HumanEval、GSM8K 等） |
+| `human-evaluation.md` | ✅ canonical | 人工评估方法与最佳实践 |
+| `llm-as-judge.md` | ✅ canonical | LLM 作为评估器 |
+| `red-teaming.md` | ✅ canonical | 红队测试与安全评估 |
+| `production-monitoring.md` | ✅ canonical | 生产环境监控与评估 |
 
 ---
 
@@ -28,7 +30,16 @@
 
 ## 💡 核心问题清单
 
-1. 不同任务类型（生成、分类、检索）该用什么指标？
-2. 如何设计有效的红队测试用例？
-3. A/B 测试中样本量如何计算？
-4. 线上模型漂移如何及时发现？
+1. 自动评估指标（BLEU、ROUGE、BERTScore）的优缺点和适用场景？
+2. 如何选择合适的基准测试套件评估模型能力？
+3. 人工评估如何设计才能既可靠又高效？
+4. LLM 作为评估器（LLM-as-Judge）的可靠性如何？
+5. 红队测试应该覆盖哪些安全维度？
+
+---
+
+## 🔗 关联板块
+
+- [04-rag-architecture](../04-rag-architecture/) — RAG 系统评估
+- [05-agent-design](../05-agent-design/) — Agent 评估
+- [12-llm-training](../12-llm-training/) — 训练过程中的评估
