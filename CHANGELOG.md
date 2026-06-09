@@ -13,6 +13,21 @@
 - 创建首个子库 `ai-engineering/`
 - 建立标签体系与文档规范
 
+## [2026-06-10] — 留学模式：AI 安全与推理部署
+
+### Added
+- **06-ai-safety/**:
+  - `ai-safety-fundamentals.md` — AI 安全基础：对齐问题、风险分类、安全开发生命周期
+  - `guardrails-and-llm-shield.md` — 护栏与防护：输入过滤、输出审核、NeMo Guardrails
+  - `red-teaming-adversarial.md` — 红队测试与对抗攻击：越狱、提示注入、防御策略
+- **07-inference-deployment/**:
+  - `model-quantization.md` — 模型量化：INT8、INT4、GPTQ、AWQ、GGUF
+  - `inference-optimization.md` — 推理优化：KV Cache、FlashAttention、投机解码、连续批处理
+  - `model-serving.md` — 模型服务化：vLLM、TensorRT-LLM、TGI、SGLang 对比
+
+### Changed
+- 更新根目录 `README.md`，扩展 ai-engineering 描述
+
 ## [2026-06-09] — 留学模式：AI 工程体系全面填充
 
 ### Added
