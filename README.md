@@ -10,7 +10,7 @@
 
 | 子库 | 定位 | 状态 |
 |------|------|------|
-| [`ai-engineering/`](./ai-engineering/) | AI 工程实践：模型选型、Prompt 工程、RAG 架构、Agent 设计 | 🚧 搭建中 |
+| [`ai-engineering/`](./ai-engineering/) | AI 工程实践：模型选型、Prompt 工程、RAG 架构、Agent 设计 | 🚧 持续完善中 |
 
 > 💡 **未来扩展方向**：`system-design/`（系统设计）、`product-thinking/`（产品思维）、`career-growth/`（职业发展）等，按需新建。
 

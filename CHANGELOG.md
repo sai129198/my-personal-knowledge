@@ -13,6 +13,28 @@
 - 创建首个子库 `ai-engineering/`
 - 建立标签体系与文档规范
 
+## [2026-06-09] — 留学模式：AI 工程体系全面填充
+
+### Added
+- **01-foundations/**:
+  - `model-evaluation-metrics.md` — 模型评估指标：Perplexity、BLEU、HumanEval、MMLU、LLM-as-a-Judge
+- **03-prompt-engineering/**:
+  - `prompt-design-patterns.md` — Prompt 设计模式大全：Zero-shot、Few-shot、CoT、ToT、ReAct 等
+  - `prompt-optimization-techniques.md` — Prompt 优化技巧：APE、DSPy、多 Prompt 集成
+  - `domain-specific-prompts.md` — 领域专用 Prompt 模板：代码、写作、数据分析、创意
+- **04-rag-architecture/**:
+  - `rag-core-concepts.md` — RAG 核心概念：Embedding、向量数据库、检索策略、生成增强
+  - `rag-advanced-techniques.md` — RAG 高级技术：Hybrid Search、Reranking、Query 重写、多跳检索
+  - `rag-production-system.md` — RAG 生产系统：架构设计、性能优化、评估体系、监控告警
+- **05-agent-design/**:
+  - `agent-fundamentals.md` — Agent 基础：定义、架构、工具调用、记忆系统
+  - `agent-patterns.md` — Agent 设计模式：ReAct、Plan-and-Execute、Multi-Agent、Reflection
+  - `agent-frameworks.md` — Agent 框架对比：LangChain、AutoGen、CrewAI、Dify、DSPy
+
+### Changed
+- 更新 `01-foundations/README.md`，添加 model-evaluation-metrics 索引
+- 更新根目录 `README.md`，更新 ai-engineering 状态
+
 ## [2026-06-06] — 留学模式：AI Infra 与应用层知识梳理
 
 ### Added
