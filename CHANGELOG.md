@@ -13,6 +13,27 @@
 - 创建首个子库 `ai-engineering/`
 - 建立标签体系与文档规范
 
+## [2026-06-12] — 留学模式：数据工程与安全合规
+
+### Added
+- **08-data-engineering/**:
+  - `data-preprocessing.md` — 数据预处理：清洗、去重、质量评估、敏感信息处理
+  - `embedding-models.md` — 嵌入模型：选型、评估、微调、部署优化
+  - `data-labeling.md` — 数据标注：流程设计、质量控制、主动学习、LLM 辅助
+  - `synthetic-data.md` — 合成数据：生成方法、验证、混合训练
+  - `data-pipeline.md` — 数据流水线：架构设计、编排工具、质量监控
+- **09-security/**:
+  - `prompt-injection-defense.md` — Prompt 注入防御：检测、隔离、多层防御
+  - `data-privacy-protection.md` — 数据隐私保护：差分隐私、联邦学习、脱敏
+  - `model-safety-alignment.md` — 模型安全对齐：RLHF、DPO、红队测试
+  - `content-moderation.md` — 内容审核：多层审核、图像审核、策略管理
+  - `ai-ethics-governance.md` — AI 伦理治理：公平性、可解释性、合规
+  - `red-teaming-guide.md` — 红队测试：攻击面分析、自动化测试、防御
+
+### Changed
+- 更新 `08-data-engineering/README.md`，完善目录索引
+- 更新 `09-security/README.md`，完善目录索引
+
 ## [2026-06-10] — 留学模式：AI 安全与推理部署
 
 ### Added
