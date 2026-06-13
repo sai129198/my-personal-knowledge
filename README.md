@@ -11,8 +11,10 @@
 | 子库 | 定位 | 状态 |
 |------|------|------|
 | [`ai-engineering/`](./ai-engineering/) | AI 工程实践：模型选型、Prompt 工程、RAG 架构、Agent 设计、AI 安全、推理部署 | 🚧 持续完善中 |
+| [`product-thinking/`](./product-thinking/) | 产品思维与方法论：需求洞察、产品设计、增长策略、数据驱动决策 | 📝 框架已建立 |
+| [`career-growth/`](./career-growth/) | 职业发展与个人成长：技术领导力、软技能、职业规划、学习效率 | 📝 框架已建立 |
 
-> 💡 **未来扩展方向**：`system-design/`（系统设计）、`product-thinking/`（产品思维）、`career-growth/`（职业发展）等，按需新建。
+> 💡 **未来扩展方向**：`system-design/`（系统设计）等，按需新建。
 
 ---
 

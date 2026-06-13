@@ -13,6 +13,43 @@
 - 创建首个子库 `ai-engineering/`
 - 建立标签体系与文档规范
 
+## [2026-06-13] — career-growth 子库核心内容填充
+
+### Added
+- **01-foundations/**:
+  - `career-stages.md` — 职业发展阶段模型：从初级到专家/管理者的成长路径
+- **02-technical-leadership/**:
+  - `tech-lead-role.md` — Tech Lead 角色指南：职责、能力模型、常见误区
+- **03-soft-skills/**:
+  - `effective-communication.md` — 高效沟通方法论：NVC、PREP、场景化策略
+- **04-learning-efficiency/**:
+  - `knowledge-management-system.md` — 知识管理系统：PARA、Zettelkasten、第二大脑
+- **05-career-planning/**:
+  - `job-switching-strategy.md` — 跳槽策略：从准备到谈判的全流程
+- **06-engineering-culture/**:
+  - `code-review-culture.md` — 代码审查文化：流程、规范、反模式
+
+### Changed
+- 更新 `CHANGELOG.md`
+
+## [2026-06-13] — 新增 product-thinking 和 career-growth 子库
+
+### Added
+- **product-thinking/**:
+  - 初始化子库架构（README、元信息层）
+  - 建立 7 个主题板块：基础概念、用户研究、产品设计、产品战略、增长、数据驱动、AI 产品
+  - 创建核心模板：产品拆解模板、用户研究模板
+  - 建立术语表和推荐阅读清单
+- **career-growth/**:
+  - 初始化子库架构（README、元信息层）
+  - 建立 6 个主题板块：基础概念、技术领导力、软技能、学习效率、职业规划、工程文化
+  - 创建核心模板：技术方案模板、职业反思模板
+  - 建立术语表和推荐阅读清单
+
+### Changed
+- 更新根目录 `README.md`，添加新子库导航
+- 更新 `CHANGELOG.md`，记录本次变更
+
 ## [2026-06-12] — 留学模式：数据工程与安全合规
 
 ### Added
