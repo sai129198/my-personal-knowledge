@@ -17,6 +17,17 @@ Tech Lead（技术负责人）是**技术决策者** + **团队协调者**的混
 | 中型公司 | 技术 + 少量管理 | 可能带 2-5 人 |
 | 创业公司 | 技术一把手 | 可能带整个技术团队 |
 
+### Tech Lead 作为 Staff Archetype
+
+> Tech Lead 是四种 Staff+ 原型中最常见的一种。每 8 个工程师大约需要 1 个 Tech Lead。
+> —— Will Larson, *Staff Archetypes*
+
+**关键洞察**：
+- Tech Lead 日常与 Senior 工程师的工作最相似，因此是从 Senior 到 Staff 最直观的过渡
+- 但「做 Tech Lead 的工作」≠「达到 Staff 级别的影响力」
+- 成为 Staff 工程师不仅仅是 role——它是 **role、behavior、impact 以及组织对你这三者的认可的交集**
+- 你会发现非 Staff 工程师也会表现出每种原型的行为，但 Staff 级别要求的是**持续、可验证的影响力**
+
 ---
 
 ## 📋 核心职责
