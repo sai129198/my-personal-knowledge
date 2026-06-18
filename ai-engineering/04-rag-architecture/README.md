@@ -11,12 +11,14 @@
 | [`rag-core-concepts.md`](./rag-core-concepts.md) | RAG 核心概念：Embedding、向量数据库、检索策略、生成增强 | #status/draft |
 | [`rag-advanced-techniques.md`](./rag-advanced-techniques.md) | RAG 高级技术：Hybrid Search、Reranking、Query 重写、多跳检索 | #status/draft |
 | [`rag-production-system.md`](./rag-production-system.md) | RAG 生产系统：架构设计、性能优化、评估体系、监控告警 | #status/draft |
+| [`ragflow-deep-dive.md`](./ragflow-deep-dive.md) | RAGFlow 深度解析：开源 RAG/Agent 平台架构、核心组件、版本演进与生产实践 | #status/completed |
 
 ## 规划内容
 
 - [x] RAG 核心概念与基础实现
 - [x] RAG 高级技术（Hybrid Search、Reranking、Query 重写）
 - [x] RAG 生产系统设计
+- [x] **RAGFlow 深度解析** — 开源 RAG/Agent 平台架构与实践
 - [ ] GraphRAG 与知识图谱增强
 - [ ] Multi-Modal RAG（图像、视频检索）
 - [ ] RAG 安全与隐私保护
