@@ -9,6 +9,7 @@
 ## [Unreleased]
 
 ### Added
+- `ai-engineering/06-evaluation/deepswe-benchmark.md` — DeepSWE 基准测试深度解析（2026-06-22 留学调研成果）
 - 初始化知识库架构（根目录 README、.gitignore、CHANGELOG）
 - 创建首个子库 `ai-engineering/`
 - 建立标签体系与文档规范

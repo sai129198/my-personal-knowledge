@@ -12,6 +12,7 @@
 |------|------|------|
 | `evaluation-metrics.md` | ✅ canonical | 评估指标详解（BLEU、ROUGE、BERTScore 等） |
 | `benchmark-suites.md` | ✅ canonical | 主流基准测试套件（MMLU、HumanEval、GSM8K 等） |
+| `deepswe-benchmark.md` | ✅ canonical | DeepSWE：面向 AI 编程代理的长周期软件工程基准 |
 | `human-evaluation.md` | ✅ canonical | 人工评估方法与最佳实践 |
 | `llm-as-judge.md` | ✅ canonical | LLM 作为评估器 |
 | `red-teaming.md` | ✅ canonical | 红队测试与安全评估 |
