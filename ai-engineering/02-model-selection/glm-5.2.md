@@ -241,7 +241,24 @@ DeepSeek Sparse Attention 让 GLM-5.2 在 1M 上下文下仍保持高效，这�
 
 renning22 将 DSA kernel 移植到 RTX 4090 (sm_89) 是一个重要信号：大模型的 "消费级化" 正在加速。虽然 24 张 4090 仍非普通用户能负担，但相比 H100 集群已大幅降低门槛。
 
-### 4. 与 DeepSWE 的关联
+### 4. 与 DeepSeek-V4-Pro 的对比
+
+同为 2026 年 6 月发布的开源旗舰模型，两者定位不同：
+
+| 维度 | GLM-5.2 | DeepSeek-V4-Pro |
+|------|---------|-----------------|
+| 总参数量 | 744B | **1.6T** |
+| 激活参数量 | 40B | **49B** |
+| 竞赛数学 (AIME) | **99.2** 🥇 | 95.2 |
+| 代码修复 (SWE-bench Pro) | **62.1** 🥇 | 55.4 |
+| 终端操作 (Terminal Bench) | **81.0** 🥇 | 67.9 |
+| Agent (MCP-Atlas) | **76.8** | 73.6 |
+| 工具使用 (Tool-Decathlon) | 48.2 | **51.8** |
+| 知识问答 (MMLU-Pro) | 未报告 | **87.5** |
+
+**结论**：GLM-5.2 是"代码专家"，DeepSeek-V4-Pro 是"知识通才"。详细对比见 [GLM-5.2 vs DeepSeek-V4-Pro 深度对比](/docs/glm-5.2-vs-deepseek-v4-pro.md)。
+
+### 5. 与 DeepSWE 的关联
 
 GLM-5.2 在 DeepSWE 上得分 46.2，相比 Claude Opus 4.8 (58) 和 GPT-5.5 (70) 仍有差距。这说明：
 - 长周期软件工程仍是闭源模型的护城河
