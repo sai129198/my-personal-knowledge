@@ -12,6 +12,7 @@
 | [ai-infra-landscape](ai-infra-landscape) | AI Infra 知识全景图：计算、数据、模型、平台、安全治理 | #status/draft |
 | [ai-application-layer](ai-application-layer) | AI 应用层知识全景图：内容生成、知识处理、智能代理、垂直行业 | #status/draft |
 | [llm-principles-training-finetuning](llm-principles-training-finetuning) | 大模型原理、训练与微调详解：Transformer、预训练、SFT、RLHF、LoRA 等 | #status/draft |
+| [ai-ontology](ai-ontology) | AI 本体论：人工智能的哲学基础——从图灵测试到中文屋论证，从计算主义到意识难题 | #status/draft |
 
 ## 规划内容
 
@@ -21,3 +22,5 @@
 - [x] 大模型原理、训练与微调详解
 - [ ] 模型评估指标（Perplexity、BLEU、HumanEval 等）
 - [ ] 上下文学习与 In-Context Learning 原理
+- [ ] 现象学 AI 与具身认知
+- [ ] 扩展心智理论与 AI 作为认知延伸
