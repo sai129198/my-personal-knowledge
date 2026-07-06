@@ -15,6 +15,8 @@ docs/ai-industry-insights/
 │   ├── google-io-2026.md             # Google I/O 2026 深度解读
 │   ├── comparison-analysis.md        # OpenAI vs Google 战略对比
 │   └── key-trends-2026.md            # 2026年AI行业关键趋势
+├── 2026-07/                           # 2026年7月洞察
+│   └── glm-5.2-community-deployment-update.md  # GLM-5.2 社区部署全景报告
 └── [未来月份]/                         # 持续添加
 ```
 
@@ -72,6 +74,7 @@ docs/ai-industry-insights/
 | 日期 | 更新内容 |
 |------|---------|
 | 2026-06-13 | 创建知识库，完成 OpenAI 和 Google I/O 2026 深度解读 |
+| 2026-07-06 | 新增 GLM-5.2 社区部署全景报告：数据中心/工作站/消费级三条路径、NVFP4+REAP 剪枝、MTP 5-token、IndexCache 论文解读 |
 
 ---
 

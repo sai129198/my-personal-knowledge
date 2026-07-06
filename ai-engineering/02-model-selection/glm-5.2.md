@@ -1,7 +1,7 @@
 # GLM-5.2 深度研究报告
 
-> 研究时间: 2026-06-22
-> 来源: zai-org/GLM-5 GitHub, Hugging Face, arXiv, 社区部署实践
+> 研究时间: 2026-06-22（初版），2026-07-06（增补：API 定价、MTP 5-token、NVFP4、IndexCache、DevPack 生态）
+> 来源: zai-org/GLM-5 GitHub, Hugging Face, arXiv, 社区部署实践, Z.ai API 文档, vLLM/SGLang Recipes
 > 标签: #status/canonical #topic/model-selection #topic/llm #topic/inference #year/2026
 
 ---
@@ -270,11 +270,148 @@ GLM-5.2 在 DeepSWE 上得分 46.2，相比 Claude Opus 4.8 (58) 和 GPT-5.5 (70
 | 配置 | 显存需求 | 估算成本 |
 |------|----------|----------|
 | 4× RTX PRO 6000 | 384GB | ~$20,000 硬件 |
-| 24× RTX 4090-48GB | 1,152GB | ~$24,000 硬件 |
+| 32× RTX 4090-48GB (最新社区实测) | 1,536GB | ~$32,000 硬件 |
 | 8× H100-80GB | 640GB | ~$200,000+ 硬件 |
-| API (Z.ai) | 按需 | $0.01-0.02 / 1K tokens |
+| API (Z.ai) | 按需 | $1.4 input / $4.4 output per 1M tokens |
+
+> **⚠️ 价格校正（2026-07-06）**：之前估算的 $0.01-0.02/1K tokens 偏差较大。实际 Z.ai 官方定价为 **$1.4/M 输入 + $4.4/M 输出**。按输入输出比 4:1 计算，实际成本约 ~$2.0/1M tokens。Cached Input 仅 $0.26/M，对长对话场景友好。
 
 对于大多数应用，API 调用仍是最经济的选择；本地部署适合数据隐私要求高或需要大规模批处理的场景。
+
+### 6. 与 GLM-5.2 相关的定价梯度
+
+Z.ai 的阶梯定价值得关注：
+
+| 模型 | Input/1M | Output/1M | 性价比判断 |
+|------|----------|-----------|-----------|
+| GLM-5.2 | $1.4 | $4.4 | 旗舰，代码/Agent |
+| GLM-5-Turbo | $1.2 | $4.0 | 略低定价的 5 代 |
+| GLM-4.7 | $0.6 | $2.2 | 便宜 2.3×，日常可用 |
+| GLM-4.7-Flash | 免费 | 免费 | 轻量场景零成本 |
+
+**策略建议**：GLM-4.7 在日常对话和普通编程任务上性价比更高，仅在需要 1M 上下文或最优代码能力时使用 GLM-5.2。
+
+---
+
+## 🆕 2026-07-06 增补：新发现与深度洞察
+
+### A. MTP 推测解码：从 3 token 到 5 token
+
+> 这是我之前遗漏的关键细节。
+
+GLM-5.2 的 Multi-Token Prediction 在实际部署中默认使用 **5 个 draft tokens**（vLLM/SGLang 均配置为 `--speculative-config.num_speculative_tokens 5`），而之前的技术报告描述的是 3 token。实际效果：
+
+- 接受长度提升 20%（相比 GLM-5/5.1）
+- 在短上下文解码速度测试中，5-token MTP 配合 FP8 KV Cache，8×H200 单节点可达到高吞吐
+- **重要提示**：纯吞吐量基准测试（如 random 数据集）会低报 MTP 实际收益，因为 MTP 在高信息密度推理任务上的接受率更高
+
+vLLM #45895 PR 专门修复了 MTP 接受率问题，部署时应使用最新分支或官方 Docker 镜像 `vllm/vllm-openai:glm52`。
+
+### B. IndexCache / IndexShare 学术支撑
+
+> 这是我本次留学最大的技术收获。
+
+IndexShare 的本质在 arXiv:2603.12201 论文《Accelerating Sparse Attention via Cross-Layer Index Reuse》中得到了完整阐述：
+
+**核心发现**：连续层的 top-k 选择高度相似。
+
+**两种方案**：
+1. **Training-free IndexCache**：贪心搜索哪些层保留 indexer，直接最小化 calibration 集合上的 LM loss，不需要权重更新
+2. **Training-aware IndexCache**：多层级蒸馏损失，让保留的 indexer 学习它服务的所有层的平均注意力分布
+
+**实验数据（30B DSA 模型）**：
+- 移除 **75%** 的 indexer 计算，质量几乎无损
+- Prefill 加速 **1.82×**，Decode 加速 **1.48×**
+
+**GLM-5.2 中的应用**：78 层中 21 层 Full（自己跑 indexer）+ 57 层 Shared/Skip（复用最近 Full 层的 top-k），在 1M 上下文下每 token FLOPs 降低 **2.9×**。
+
+> **我的判断**：这不仅仅是性能优化，而是稀疏注意力在工程化道路上的一个范式转变——"没必要每层都重新选择"是一个很工程化的洞察，简单但有效。
+
+### C. NVFP4 + REAP 剪枝：469B 消费级变体
+
+社区（0xSero）基于 NVIDIA ModelOpt 工具链，对 GLM-5.2 做了两项优化：
+1. **REAP 剪枝**：将专家网络冗余参数剪掉
+2. **NVFP4 量化**：仅 MoE 专家矩阵降到 4-bit（shared experts、attention、embedding 保持 FP8/BF16）
+
+结果是 **GLM-5.2-NVFP4-REAP-469B**（约 313GB 磁盘空间），极大降低了部署门槛：
+
+| 指标 | 值 |
+|------|-----|
+| 总参数 | 469B（pruned） |
+| 磁盘占用 | ~313 GB（NVFP4） |
+| 每 GPU 占用 | ~78.6 GB/GPU |
+| 推荐 GPU | 4× RTX PRO 6000 Blackwell (SM120, 96GB) |
+| 上下文 | 250K（DCP=4） |
+| 解码速度 | ~60 tok/s（warm, MTP） |
+
+> **关键约束**：DSA 的 fp4 indexer cache 硬要求 SM100（B200/GB200），所以 NVFP4 变体在 SM120 消费级卡上只能用 fp8 KV cache，不能进一步压到 fp4。
+
+NVIDIA 也官方发布了 `nvidia/GLM-5.2-NVFP4`，自动检测量化格式，vLLM 零配置支持。
+
+### D. AMD MI300X/MI355X 支持
+
+GLM-5.2 已经通过 ROCm + AITER 后端支持 AMD GPU：
+
+```bash
+VLLM_ROCM_USE_AITER=1 \
+VLLM_ROCM_USE_AITER_FUSION_SHARED_EXPERTS=1 \
+vllm serve zai-org/GLM-5.2-FP8 \
+ --kv-cache-dtype fp8_e4m3 \
+ --tensor-parallel-size 8 \
+ --speculative-config.method mtp \
+ --speculative-config.num_speculative_tokens 5 \
+ --linear-backend aiter --moe-backend aiter
+```
+
+AITER 融合了 shared expert 的 MoE 路径，是 ROCm 生态的重要信号。
+
+### E. Z.ai Developer Pack (DevPack) — 完整的 Coding Agent 生态
+
+Z.ai 不只是提供模型 API，而是围绕 GLM-5.2 构建了一整套 Coding Agent 基础设施：
+
+| 组件 | 功能 |
+|------|------|
+| **Coding Tool Helper** | Claude Code / Kilo Code / Cline / OpenCode / OpenClaw 一键接入 |
+| **Web Search MCP Server** | 内置搜索工具 |
+| **Web Reader MCP Server** | URL 内容抓取 |
+| **Vision MCP Server** | 截图理解 |
+| **Zread MCP Server** | 文档阅读 |
+| **Coding Plan 订阅** | $18/月起，包含快速、可靠的代码生成和工具使用 |
+| **Memory Mechanism** | 跨会话记忆 |
+| **Context Caching** | 智能缓存长对话 |
+
+> **产品洞察**：智谱的策略是"让 GLM-5.2 成为 Coding Agent 的默认后端"。$18/月的 Coding Plan 对标 Claude Code / GitHub Copilot 的价格带，但提供开源模型的透明度和灵活性。
+
+### F. 社区部署进展更新
+
+#### renning22/glm-5.2-4090（重大更新）
+
+从初版的 24× RTX 4090 升级到了 **32× RTX 4090-48GB**（4 节点 × 8 卡）：
+
+- 解码速度从 ~10 tok/s 提升到 **~24 tok/s**（CUDA Graph 单流）
+- 聚合吞吐 **~725 tok/s**（128 并发流，CUDA Graph）
+- 已验证驱动真实的 Claude Code session（tool calls、multi-turn loops、streaming）
+- 所有 kernel 验证精度 ~1e-6，包括在实际模型 tensor 上的 cos 相似度 0.999999
+
+#### 0xSero/glm-5.2-sm120（全新方案）
+
+- 使用专用 vLLM Docker 镜像（voipmonitor/vllm:black-benediction 系列）
+- 捆绑了 SM120 原生稀疏 MLA kernel (`B12X_MLA_SPARSE`)
+- DCP=4 支持 250K 上下文
+- 一键启动脚本（launch.sh），含自动健康检测
+
+#### RTX 5090 兼容性
+
+RTX 5090 虽然是 sm_120（consumer Blackwell），但官方 DSA kernel 只覆盖 sm_90/sm_100，不覆盖 sm_120。renning22 的 Ada 移植同样需要适配 RTX 5090（扩展 capability guard），估算 32× RTX 5090（32GB 版）可部署完整 FP8 模型。
+
+### G. vLLM/SGLang 部署生态对比
+
+| 框架 | 版本 | 特点 | 推荐场景 |
+|------|------|------|----------|
+| **vLLM** | ≥0.23.0 | Docker 镜像 `vllm/vllm-openai:glm52`、专用 tool/reasoning parser (`glm47`/`glm45`)、DeepGEMM 集成 | 生产部署、稳定版本 |
+| **SGLang** | ≥0.5.13.post1 | 性能最佳、交互式 playground（自动生成配置）、DSA 原生优化 | 追求极致性能 |
+| **KTransformers** | ≥0.5.12 | 消费级 GPU 友好、CPU/GPU 混合推理 | 消费级硬件 |
+| **Unsloth** | ≥0.1.47-beta | 微调优化 | 微调场景 |
 
 ---
 
@@ -288,3 +425,11 @@ GLM-5.2 在 DeepSWE 上得分 46.2，相比 Claude Opus 4.8 (58) 和 GPT-5.5 (70
 - **slime (训练框架)**: https://github.com/THUDM/slime
 - **RTX PRO 6000 部署**: https://github.com/0xSero/glm-5.2-sm120
 - **RTX 4090 社区移植**: https://github.com/renning22/glm-5.2-4090
+- **GLM-5.2-NVFP4-REAP-469B (消费级)**: https://huggingface.co/0xSero/GLM-5.2-NVFP4-REAP-469B
+- **sm120 部署方案**: https://github.com/0xSero/glm-5.2-sm120
+- **NVIDIA NVFP4 官方量化**: https://huggingface.co/nvidia/GLM-5.2-NVFP4
+- **IndexCache/IndexShare 论文**: https://arxiv.org/abs/2603.12201
+- **Z.ai 定价**: https://docs.z.ai/guides/overview/pricing
+- **Z.ai DevPack**: https://docs.z.ai/devpack/overview
+- **vLLM Recipe**: https://recipes.vllm.ai/zai-org/GLM-5.2
+- **SGLang Cookbook**: https://docs.sglang.io/cookbook/autoregressive/GLM/GLM-5.2

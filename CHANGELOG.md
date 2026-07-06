@@ -9,7 +9,21 @@
 ## [Unreleased]
 
 ### Added
-- `ai-engineering/02-model-selection/glm-5.2.md` — GLM-5.2 开源旗舰模型深度解析（2026-06-22 留学调研成果）
+- `ai-engineering/02-model-selection/glm-5.2.md` — GLM-5.2 开源旗舰模型深度解析（2026-06-22 初版，2026-07-06 大幅增补）
+- `docs/ai-industry-insights/2026-07/glm-5.2-community-deployment-update.md` — GLM-5.2 社区部署全景报告：数据中心/工作站/消费级三条路径（2026-07-06 留学调研成果）
+
+### Changed
+- `ai-engineering/02-model-selection/glm-5.2.md` 增补（2026-07-06）：
+  - 新增 MTP 5-token 推测解码细节（纠正初版的 3-token 描述）
+  - 新增 IndexCache/IndexShare 学术支撑（arXiv:2603.12201 论文解读）
+  - 新增 NVFP4 + REAP 剪枝的 469B 消费级变体
+  - 新增 AMD MI300X/MI355X ROCm 支持方案
+  - 新增 Z.ai DevPack 完整 Coding Agent 生态
+  - 新增精确 API 定价（$1.4/$4.4 per 1M tokens，纠正初版 $0.01-0.02/1K 的偏差估算）
+  - 新增社区部署最新进展（renning22 从 24 卡升级到 32 卡，速度从 10→24 tok/s）
+  - 新增 vLLM/SGLang 部署生态对比
+  - 新增参考资源链接（7个）
+- `docs/ai-industry-insights/README.md` — 更新目录和更新日志，添加 2026-07 条目
 - `ai-engineering/06-evaluation/deepswe-benchmark.md` — DeepSWE 基准测试深度解析（2026-06-22 留学调研成果）
 - 初始化知识库架构（根目录 README、.gitignore、CHANGELOG）
 - 创建首个子库 `ai-engineering/`
