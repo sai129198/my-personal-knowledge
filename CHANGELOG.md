@@ -9,6 +9,11 @@
 ## [Unreleased]
 
 ### Added
+- **05-agent-design/cognee-deep-dive.md** — Cognee 开源 AI Memory 平台深度解析（架构/API/竞品对比/实战用例）
+  - 从 GitHub、官方文档、学术论文、技术博客等多源资料精读后沉淀
+  - 关联至现有 `agent-memory.md`
+
+### Added
 - `ai-engineering/02-model-selection/glm-5.2.md` — GLM-5.2 开源旗舰模型深度解析（2026-06-22 初版，2026-07-06 大幅增补）
 - `docs/ai-industry-insights/2026-07/glm-5.2-community-deployment-update.md` — GLM-5.2 社区部署全景报告：数据中心/工作站/消费级三条路径（2026-07-06 留学调研成果）
 
