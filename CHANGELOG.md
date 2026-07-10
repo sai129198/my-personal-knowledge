@@ -12,6 +12,9 @@
 - **05-agent-design/cognee-deep-dive.md** — Cognee 开源 AI Memory 平台深度解析（架构/API/竞品对比/实战用例）
   - 从 GitHub、官方文档、学术论文、技术博客等多源资料精读后沉淀
   - 关联至现有 `agent-memory.md`
+- **05-agent-design/cognee-api-reference.md** — Cognee 接口 API 参考（Python SDK 四核心动词 + 16 种 SearchType + MCP 14 工具 + Agent 集成模式）
+- **05-agent-design/cognee-graph-visualization.md** — Cognee 图谱结构详解与前端渲染方案（vis-network / Cytoscape.js / D3-force + React 组件 + 后端 API 设计）
+- `agent-memory.md` 更新交叉引用，形成 cognee 三件套网状关联
 
 ### Added
 - `ai-engineering/02-model-selection/glm-5.2.md` — GLM-5.2 开源旗舰模型深度解析（2026-06-22 初版，2026-07-06 大幅增补）

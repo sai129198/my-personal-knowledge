@@ -669,6 +669,8 @@ class MemoryDecay:
 ## 参考资源
 
 - [Cognee 深度解析](./cognee-deep-dive.md) — 开源 AI Memory 平台，知识图谱 + 向量 + 自我优化
+- [Cognee 接口 API 参考](./cognee-api-reference.md) — Python SDK / MCP / REST 三层接口详解
+- [Cognee 图谱结构与前端渲染](./cognee-graph-visualization.md) — 图谱内部结构 + vis.js/Cytoscape/D3 渲染方案
 - [Memory in Large Language Models](https://arxiv.org/abs/2309.16528) - Wang et al., 2023
 - [LangChain Memory Documentation](https://python.langchain.com/docs/modules/memory/)
 - [Vector Memory for Conversational AI](https://www.pinecone.io/learn/vector-memory/)
