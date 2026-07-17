@@ -9,6 +9,14 @@
 ## [Unreleased]
 
 ### Added
+- **12-llm-training/post-training.md** — 后训练 (Post-Training) 全流程深度解析
+  - 从 InstructGPT / RLHF / DPO / o1 等多源资料精读后沉淀
+  - 覆盖 SFT → Reward Model → PPO → DPO → 推理增强 完整技术栈
+  - 费曼化类比 + Llama 2 实践对比 + 常见陷阱与应对
+
+## [Unreleased]
+
+### Added
 - **05-agent-design/cognee-deep-dive.md** — Cognee 开源 AI Memory 平台深度解析（架构/API/竞品对比/实战用例）
   - 从 GitHub、官方文档、学术论文、技术博客等多源资料精读后沉淀
   - 关联至现有 `agent-memory.md`
