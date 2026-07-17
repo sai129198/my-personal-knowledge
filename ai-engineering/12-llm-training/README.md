@@ -15,6 +15,8 @@
 | `training-infrastructure.md` | ✅ canonical | 训练基础设施与分布式训练 |
 | `continual-pretraining.md` | ✅ canonical | 持续预训练与领域适配 |
 | `scaling-laws.md` | ✅ canonical | 扩展定律与计算效率优化 |
+| `post-training.md` | ✅ canonical | 后训练全流程：SFT → RLHF → DPO/ORPO/KTO → GRPO → 推理增强 |
+| `pretraining-posttraining-pipeline.md` | ✅ canonical | 预训练与后训练全流程鸟瞰：概念对比、经济分析 |
 
 ---
 
@@ -47,4 +49,4 @@
 
 ---
 
-*最后更新：2026-06-08*
+*最后更新：2026-07-17*
