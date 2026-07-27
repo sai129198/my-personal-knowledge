@@ -9,6 +9,13 @@
 ## [Unreleased]
 
 ### Added
+- **13-ai-infrastructure/huawei-ascend-llm.md** — 华为昇腾在 LLM 领域的角色与现状（推理/微调/预训练成熟度分析 + DeepSeek V4/GLM-5 芯片来源判断）
+- **13-ai-infrastructure/cuda-pytorch-explained.md** — CUDA 与 PyTorch 关系通俗解读（分层理解 + 建筑类比 + 国产芯片生态对照）
+
+### Changed
+- **12-llm-training/training-infrastructure.md** — 训练硬件章节新增华为昇腾 NPU 及国产芯片生态分析
+
+### Added
 - **12-llm-training/post-training.md** — 后训练 (Post-Training) 全流程深度解析
   - 从 InstructGPT / RLHF / DPO / o1 等多源资料精读后沉淀
   - 覆盖 SFT → Reward Model → PPO → DPO → 推理增强 完整技术栈
