@@ -17,8 +17,11 @@ docs/ai-industry-insights/
 │   └── key-trends-2026.md            # 2026年AI行业关键趋势
 ├── 2026-07/                           # 2026年7月洞察
 │   ├── glm-5.2-community-deployment-update.md  # GLM-5.2 社区部署全景报告
-│   └── weekly-2026-07-13-19.md        # AI行业周报 (7.13-7.19)
-└── [未来月份]/                         # 持续添加
+│   ├── weekly-2026-07-13-19.md        # AI行业周报 (7.13-7.19)
+│   ├── weekly-2026-07-20-26.md        # AI行业周报 (7.20-7.26)
+│   └── weekly-2026-07-27-08-02.md     # AI行业周报 (7.27-8.2)
+└── 2026-08/                           # 2026年8月洞察
+    └── weekly-2026-08-03-20.md        # AI行业周报 (8.3-8.20)
 ```
 
 ---
@@ -77,6 +80,8 @@ docs/ai-industry-insights/
 | 2026-06-13 | 创建知识库，完成 OpenAI 和 Google I/O 2026 深度解读 |
 | 2026-07-06 | 新增 GLM-5.2 社区部署全景报告：数据中心/工作站/消费级三条路径、NVFP4+REAP 剪枝、MTP 5-token、IndexCache 论文解读 |
 | 2026-07-20 | 新增 AI 行业周报 (7.13-7.19)：GPT-5.6 三层体系、Kimi K3 发布、Inkling 开源模型、Gemini 3.5 Pro 延期深度分析、Meta-Anthropic 百亿算力租赁、Apple vs OpenAI 贸易秘密诉讼、全球 AI 监管执法升级 |
+| 2026-08-03 | 新增 AI 行业周报 (7.20-7.26)、(7.27-8.2)：Hugging Face 安全事件、1100+ 员工联合声明、AI Kill Switch 法案、ChatGPT Health、Anthropic 三机构入侵、OpenAI 10 亿周活、GPT-5.6 降价、Suno 版权败诉 |
+| 2026-08-20 | 新增 AI 行业周报 (8.3-8.20)：DeepSeek API 涨价与峰谷定价、OpenAI Astra 暂停（Critical 阈值）、Anthropic 首次盈利 + 自研芯片 + AMD $50 亿投资、GPT-5.6-Cyber 发布、Google DeepMind 重组（Hassabis/Jeff Dean 人事变动） |
 
 ---
 
