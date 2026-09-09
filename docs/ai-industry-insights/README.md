@@ -23,7 +23,8 @@ docs/ai-industry-insights/
 └── 2026-08/                           # 2026年8月洞察
     ├── weekly-2026-08-03-09.md        # AI行业周报 (8.3-8.9)
     ├── weekly-2026-08-10-16.md        # AI行业周报 (8.10-8.16)
-    └── weekly-2026-08-24-30.md        # AI行业周报 (8.24-8.30)
+    ├── weekly-2026-08-24-30.md        # AI行业周报 (8.24-8.30)
+    └── weekly-2026-08-31-09-06.md     # AI行业周报 (8.31-9.6)
 ```
 
 ---
@@ -85,6 +86,7 @@ docs/ai-industry-insights/
 | 2026-08-03 | 新增 AI 行业周报 (7.20-7.26)、(7.27-8.2)：Hugging Face 安全事件、1100+ 员工联合声明、AI Kill Switch 法案、ChatGPT Health、Anthropic 三机构入侵、OpenAI 10 亿周活、GPT-5.6 降价、Suno 版权败诉 |
 | 2026-08-20 | 新增 AI 行业周报 (8.3-8.9)、(8.10-8.16)：DeepSeek API 涨价与峰谷定价、OpenAI Astra 暂停（Critical 阈值）、GPT-5.6-Cyber 发布、Anthropic 首次盈利 + 自研芯片 + AMD $50 亿投资、Google DeepMind 重组（Hassabis/Jeff Dean 人事变动） |
 | 2026-09-02 | 新增 AI 行业周报 (8.24-8.30)：SpaceX 完成 Cursor 收购后 OpenAI 断供、Salesforce-Anthropic「Claudeforce」深度合作、Anthropic MHS 物理世界 Agent 规范、Google Gemini Robotics ER 2 |
+| 2026-09-09 | 新增 AI 行业周报 (8.31-9.6)：OpenAI GPT-6 Astra 发布（AGI 级 + 首个「关键」网安风险模型）、Claude 完成费马大定理全形式化证明、英伟达 129 亿美元收购 Hugging Face、国产大模型开源逆袭、AI「自主 vs 透明」安全张力 |
 
 ---
 
