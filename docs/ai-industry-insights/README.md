@@ -20,11 +20,13 @@ docs/ai-industry-insights/
 │   ├── weekly-2026-07-13-19.md        # AI行业周报 (7.13-7.19)
 │   ├── weekly-2026-07-20-26.md        # AI行业周报 (7.20-7.26)
 │   └── weekly-2026-07-27-08-02.md     # AI行业周报 (7.27-8.2)
-└── 2026-08/                           # 2026年8月洞察
-    ├── weekly-2026-08-03-09.md        # AI行业周报 (8.3-8.9)
-    ├── weekly-2026-08-10-16.md        # AI行业周报 (8.10-8.16)
-    ├── weekly-2026-08-24-30.md        # AI行业周报 (8.24-8.30)
-    └── weekly-2026-08-31-09-06.md     # AI行业周报 (8.31-9.6)
+├── 2026-08/                           # 2026年8月洞察
+│   ├── weekly-2026-08-03-09.md        # AI行业周报 (8.3-8.9)
+│   ├── weekly-2026-08-10-16.md        # AI行业周报 (8.10-8.16)
+│   ├── weekly-2026-08-24-30.md        # AI行业周报 (8.24-8.30)
+│   └── weekly-2026-08-31-09-06.md     # AI行业周报 (8.31-9.6)
+└── 2026-09/                           # 2026年9月洞察
+    └── weekly-2026-09-07-13.md        # AI行业周报 (9.7-9.13)
 ```
 
 ---
@@ -87,6 +89,7 @@ docs/ai-industry-insights/
 | 2026-08-20 | 新增 AI 行业周报 (8.3-8.9)、(8.10-8.16)：DeepSeek API 涨价与峰谷定价、OpenAI Astra 暂停（Critical 阈值）、GPT-5.6-Cyber 发布、Anthropic 首次盈利 + 自研芯片 + AMD $50 亿投资、Google DeepMind 重组（Hassabis/Jeff Dean 人事变动） |
 | 2026-09-02 | 新增 AI 行业周报 (8.24-8.30)：SpaceX 完成 Cursor 收购后 OpenAI 断供、Salesforce-Anthropic「Claudeforce」深度合作、Anthropic MHS 物理世界 Agent 规范、Google Gemini Robotics ER 2 |
 | 2026-09-09 | 新增 AI 行业周报 (8.31-9.6)：OpenAI GPT-6 Astra 发布（AGI 级 + 首个「关键」网安风险模型）、Claude 完成费马大定理全形式化证明、英伟达 129 亿美元收购 Hugging Face、国产大模型开源逆袭、AI「自主 vs 透明」安全张力 |
+| 2026-09-17 | 新增 AI 行业周报 (9.7-9.13)：GPT-6 Astra 贯穿全周（AGI 开端 / ARC-AGI-3 98.6% / 关键级风险争议 / 微软全系推送）、Anthropic Fable/Mythos 5.1 + 史上最大 IPO（估值 2 万亿 / 融资 1000 亿）、DeepSeek 科创板 IPO + 国产芯片 Day0 适配、月之暗面 500 亿估值、字节/阿里千亿算力投入、1200 Agent 越权事件、六大平台「黑色三小时」宕机 |
 
 ---
 
