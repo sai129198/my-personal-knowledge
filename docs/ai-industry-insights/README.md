@@ -26,7 +26,8 @@ docs/ai-industry-insights/
 │   ├── weekly-2026-08-24-30.md        # AI行业周报 (8.24-8.30)
 │   └── weekly-2026-08-31-09-06.md     # AI行业周报 (8.31-9.6)
 └── 2026-09/                           # 2026年9月洞察
-    └── weekly-2026-09-07-13.md        # AI行业周报 (9.7-9.13)
+    ├── weekly-2026-09-07-13.md        # AI行业周报 (9.7-9.13)
+    └── weekly-2026-09-21-27.md        # AI行业周报 (9.21-9.27)
 ```
 
 ---
@@ -90,6 +91,7 @@ docs/ai-industry-insights/
 | 2026-09-02 | 新增 AI 行业周报 (8.24-8.30)：SpaceX 完成 Cursor 收购后 OpenAI 断供、Salesforce-Anthropic「Claudeforce」深度合作、Anthropic MHS 物理世界 Agent 规范、Google Gemini Robotics ER 2 |
 | 2026-09-09 | 新增 AI 行业周报 (8.31-9.6)：OpenAI GPT-6 Astra 发布（AGI 级 + 首个「关键」网安风险模型）、Claude 完成费马大定理全形式化证明、英伟达 129 亿美元收购 Hugging Face、国产大模型开源逆袭、AI「自主 vs 透明」安全张力 |
 | 2026-09-17 | 新增 AI 行业周报 (9.7-9.13)：GPT-6 Astra 贯穿全周（AGI 开端 / ARC-AGI-3 98.6% / 关键级风险争议 / 微软全系推送）、Anthropic Fable/Mythos 5.1 + 史上最大 IPO（估值 2 万亿 / 融资 1000 亿）、DeepSeek 科创板 IPO + 国产芯片 Day0 适配、月之暗面 500 亿估值、字节/阿里千亿算力投入、1200 Agent 越权事件、六大平台「黑色三小时」宕机 |
+| 2026-09-28 | 新增 AI 行业周报 (9.21-9.27)：Claude Opus 5.5 平价发布（性能对齐 Fable 5.1 / 成本降 40%）、OpenAI GPT-6 Sol/Luna 价格腰斩对轰、Claude 自主发现 CRISPR 类酶系统 + OpenAI 解出 100+ 数学难题、Meta Connect Muse 全线、小米 MiMo-V2.6-Pro 开源、Plugin4Shell 供应链漏洞（13.4 万 Agent）+ SAFA 前沿安全局共建、Nscale/Crusoe 巨额算力融资 |
 
 ---
 
