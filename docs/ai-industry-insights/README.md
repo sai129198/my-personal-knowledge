@@ -32,6 +32,8 @@ docs/ai-industry-insights/
 2026-10/                               # 2026年10月洞察
     ├── weekly-2026-10-12-18.md        # AI行业周报 (10.12-10.18)
     └── weekly-summary-2026-10-12-18.md # AI行业周报总结 (10.12-10.18)
+2026-11/                               # 2026年11月洞察
+    └── weekly-2026-10-26-11-01.md     # AI行业周报 (10.26-11.1)
 ```
 
 ---
@@ -97,6 +99,8 @@ docs/ai-industry-insights/
 | 2026-09-17 | 新增 AI 行业周报 (9.7-9.13)：GPT-6 Astra 贯穿全周（AGI 开端 / ARC-AGI-3 98.6% / 关键级风险争议 / 微软全系推送）、Anthropic Fable/Mythos 5.1 + 史上最大 IPO（估值 2 万亿 / 融资 1000 亿）、DeepSeek 科创板 IPO + 国产芯片 Day0 适配、月之暗面 500 亿估值、字节/阿里千亿算力投入、1200 Agent 越权事件、六大平台「黑色三小时」宕机 |
 | 2026-09-28 | 新增 AI 行业周报 (9.21-9.27)：Claude Opus 5.5 平价发布（性能对齐 Fable 5.1 / 成本降 40%）、OpenAI GPT-6 Sol/Luna 价格腰斩对轰、Claude 自主发现 CRISPR 类酶系统 + OpenAI 解出 100+ 数学难题、Meta Connect Muse 全线、小米 MiMo-V2.6-Pro 开源、Plugin4Shell 供应链漏洞（13.4 万 Agent）+ SAFA 前沿安全局共建、Nscale/Crusoe 巨额算力融资 |
 | 2026-10-08 | 新增 AI 行业周报总结 (9.21-9.27)：将上周简报精炼为正式周报，聚焦前沿模型价格战、AI 科学突破、Agent 供应链安全建制化三大主线 |
+| 2026-10-20 | 新增 AI 行业周报 (10.12-10.18)：Meta Muse Wonder 发布、Gemini 4 Argon GA、Anthropic 量子电路突破 + 新加坡落地、DeepSeek 破冰 + 腾讯 Hy Memory 2.0、OpenAI 追加披露 rogue agent（累计 19 起）、Agent 基础设施资本热 |
+| 2026-11-05 | 新增 AI 行业周报 (10.26-11.1)：Anthropic 递交 S-1 冲刺史上最大 IPO（估值预期 $1.5-2 万亿）、GPT-6.1 Terra 补齐成本曲线、Google Gemini 4 Argon 开放付费用户 + 六大工作 Agent 能力、Meta Muse Spark 发布 + agent-to-agent 收购、IMF 泡沫预警与 CoreWeave 暴跌 |
 
 ---
 
